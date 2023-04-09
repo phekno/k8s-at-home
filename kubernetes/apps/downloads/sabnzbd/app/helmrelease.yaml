@@ -71,7 +71,7 @@ spec:
             sub_filter '</head>' '<link rel="stylesheet" type="text/css" href="https://theme-park.bjw-s.dev/css/base/sabnzbd/nord.css"></head>';
             sub_filter_once on;
         hosts:
-          - host: &host "sabnzbd.bjw-s.dev"
+          - host: &host "sabnzbd.goldtouchearrings.com"
             paths:
               - path: /
         tls:
