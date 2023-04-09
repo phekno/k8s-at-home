@@ -79,9 +79,12 @@ spec:
               - *host
 
     persistence:
-      config:
+      incomplete:
         enabled: true
-        existingClaim: sabnzbd-config
+        type: emptyDir
+      # config:
+      #   enabled: true
+      #   existingClaim: sabnzbd-config
       # media:
       #   enabled: true
       #   type: nfs
