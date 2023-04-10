@@ -126,6 +126,10 @@ spec:
       targetPath: objstoreConfig.config.region
     - kind: Secret
       name: thanos-secret
+      valuesKey: S3_BUCKET_ENDPOINT
+      targetPath: objstoreConfig.config.endpoint
+    - kind: Secret
+      name: thanos-secret
       valuesKey: S3_ACCESS_KEY
       targetPath: objstoreConfig.config.access_key
     - kind: Secret
