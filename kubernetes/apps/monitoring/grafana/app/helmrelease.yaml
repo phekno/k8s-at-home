@@ -81,7 +81,7 @@ spec:
       GF_PATHS_PROVISIONING: /etc/grafana/provisioning
       GF_SECURITY_ALLOW_EMBEDDING: true
       GF_SECURITY_COOKIE_SAMESITE: grafana
-      GF_SERVER_ROOT_URL: "https://grafana.goldtouchearrings.com"
+      GF_SERVER_ROOT_URL: "https://grafana.phekno.io"
 
     envFromSecret: grafana-secrets
 
@@ -117,7 +117,7 @@ spec:
         plugins: /var/lib/grafana/plugins
         provisioning: /etc/grafana/provisioning
       server:
-        root_url: https://grafana.goldtouchearrings.com
+        root_url: https://grafana.phekno.io
 
     imageRenderer:
       enabled: true
@@ -128,7 +128,7 @@ spec:
       annotations:
         nginx.ingress.kubernetes.io/whitelist-source-range: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
       hosts:
-        - &host grafana.goldtouchearrings.com
+        - &host grafana.phekno.io
       tls:
         - hosts:
             - *host
