@@ -564,3 +564,27 @@ The world is your cluster, have at it!
 Big shout out to all the authors and contributors to the projects that we are using in this repository.
 
 [@whazor](https://github.com/whazor) created [this website](https://nanne.dev/k8s-at-home-search/) as a creative way to search Helm Releases across GitHub. You may use it as a means to get ideas on how to configure an applications' Helm values.
+
+## SOPS
+1. Create a file for your external secrets, something like:
+  ```
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: secret-one
+    namespace: kube-system
+  stringData:
+    secret-one.json:
+  ---
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: secret-2
+    namespace: kube-system
+  stringData:
+    secret-2:
+  ```
+
+2. Add the secrets in (in this case, in to the `secret-one.json` (base64 encoded) and `secret-2` fields)
+3. Encrypt! `sops -e --encrypted-regex '((?i)(pass|secret($|[^N])|key|token|^data$|^stringData))' --in-place kubernetes/apps/kube-system/something/secret.sops.yaml
+4. Done
