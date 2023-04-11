@@ -586,5 +586,5 @@ Big shout out to all the authors and contributors to the projects that we are us
   ```
 
 2. Add the secrets in (in this case, in to the `secret-one.json` (base64 encoded) and `secret-2` fields)
-3. Encrypt! `sops -e --encrypted-regex '((?i)(pass|secret($|[^N])|key|token|^data$|^stringData))' --in-place kubernetes/apps/kube-system/something/secret.sops.yaml
+3. Encrypt! `sops -e --encrypted-regex '((?i)(pass|secret($|[^N])|key|token|^data$|^stringData))' --in-place kubernetes/apps/kube-system/something/secret.sops.yaml`
 4. Done
