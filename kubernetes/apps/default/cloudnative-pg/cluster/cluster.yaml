@@ -16,9 +16,12 @@ spec:
     storageClass: local-path
   superuserSecret:
     name: cloudnative-pg-secret
-  # bootstrap:
-  #   recovery:
-  #     source: &previous-cluster postgres-v2
+  bootstrap:
+    initdb:
+      database: app
+      owner: app
+      secret:
+        name: postgres-app
   postgresql:
     parameters:
       max_connections: "600"
