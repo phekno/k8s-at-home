@@ -31,7 +31,7 @@ spec:
               name: authentik-secret
               key: postgres_password
       redis:
-        host: redis.databases.svc.cluster.local
+        host: redis.svc.cluster.local
       # email:
       #   host: "mailer.skylab.fi"
       #   port: 587
