@@ -7,3 +7,5 @@ resources:
   - ./hajimari/ks.yaml
   - ./redis/ks.yaml
   - ./glauth/ks.yaml
+  - ./authelia/ks.yaml
+  - ./cloudnative-pg/ks.yaml
