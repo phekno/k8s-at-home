@@ -70,5 +70,10 @@ spec:
 
     postgresql:
       enabled: true
+      password:
+        valueFrom:
+          secretKeyRef:
+            name: authentik-secret
+            key: postgres_password
     redis:
       enabled: true
