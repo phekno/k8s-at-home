@@ -34,9 +34,9 @@ spec:
       error_reporting:
         enabled: false
       postgresql:
-        host: "10.100.50.232"
-        name: "authentik"
-        user: "authentik"
+        host: 10.100.50.232
+        name: authentik
+        user: authentik
         password:
           valueFrom:
             secretKeyRef:
