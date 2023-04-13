@@ -43,7 +43,13 @@ spec:
       repository: ghcr.io/authelia/authelia
       # TODO Switch to Authelia release tag on next release
       tag: master@sha256:570648ff714df9625cba48c07298615c49c23d631be2f5651027f44c18403e92
-    args: ["--config", "/config/configuration.yml", "--config.experimental.filters", "expand-env"]
+    args:
+      [
+        "--config",
+        "/config/configuration.yml",
+        "--config.experimental.filters",
+        "expand-env",
+      ]
     envFrom:
       - secretRef:
           name: authelia-secret
@@ -85,7 +91,7 @@ spec:
         enabled: true
         ingressClassName: nginx
         annotations:
-          external-dns.alpha.kubernetes.io/target: ipv4.devbu.io
+          external-dns.alpha.kubernetes.io/target: ipv4.phekno.io
           nginx.ingress.kubernetes.io/configuration-snippet: |
             add_header Cache-Control "no-store";
             add_header Pragma "no-cache";
@@ -93,7 +99,7 @@ spec:
             add_header X-XSS-Protection "1; mode=block";
           hajimari.io/icon: mdi:shield-account
         hosts:
-          - host: &host auth.devbu.io
+          - host: &host auth.phekno.io
             paths:
               - path: /
                 pathType: Prefix
