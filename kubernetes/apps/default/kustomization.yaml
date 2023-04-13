@@ -8,4 +8,4 @@ resources:
   - ./glauth/ks.yaml
   - ./redis/ks.yaml
   - ./cloudnative-pg/ks.yaml
-  - ./authelia/ks.yaml
+  # - ./authelia/ks.yaml
