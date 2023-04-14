@@ -91,3 +91,49 @@ resource "cloudflare_record" "root" {
   type    = "CNAME"
   ttl     = 1
 }
+
+resource "cloudflare_record" "ses_dkim_1" {
+  name    = "yvuyrpzqcwyvfthavtoanh7jjd4uas6k._domainkey.phekno.io"
+  zone_id = lookup(data.cloudflare_zones.domain.zones[0], "id")
+  value   = "yvuyrpzqcwyvfthavtoanh7jjd4uas6k.dkim.amazonses.com"
+  proxied = false
+  type    = "CNAME"
+  ttl     = 1
+}
+
+resource "cloudflare_record" "ses_dkim_2" {
+  name    = "qg2wghyksntqg5roetppszp5fg4cdclx._domainkey.phekno.io"
+  zone_id = lookup(data.cloudflare_zones.domain.zones[0], "id")
+  value   = "qg2wghyksntqg5roetppszp5fg4cdclx.dkim.amazonses.com"
+  proxied = false
+  type    = "CNAME"
+  ttl     = 1
+}
+
+resource "cloudflare_record" "ses_dkim_3" {
+  name    = "ig7l2ajxur4anp2useowkatq3ppa6lbv._domainkey.phekno.io"
+  zone_id = lookup(data.cloudflare_zones.domain.zones[0], "id")
+  value   = "ig7l2ajxur4anp2useowkatq3ppa6lbv.dkim.amazonses.com"
+  proxied = false
+  type    = "CNAME"
+  ttl     = 1
+}
+
+resource "cloudflare_record" "ses_mailfrom_mx" {
+  name     = "mail.phekno.io"
+  zone_id  = lookup(data.cloudflare_zones.domain.zones[0], "id")
+  type     = "MX"
+  priority = 10
+  value    = "feedback-smtp.us-east-1.amazonses.com"
+  proxied  = false
+  ttl      = 1
+}
+
+resource "cloudflare_record" "ses_mailfrom_spf" {
+  name    = "mail.phekno.io"
+  zone_id = lookup(data.cloudflare_zones.domain.zones[0], "id")
+  value   = "v=spf1 include:amazonses.com ~all"
+  proxied = false
+  type    = "TXT"
+  ttl     = 1
+}
