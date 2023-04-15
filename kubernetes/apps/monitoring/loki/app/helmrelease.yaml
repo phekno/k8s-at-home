@@ -67,10 +67,12 @@ spec:
                 valueFrom:
                   - secretRef:
                       name: loki-secret
+                      key: AWS_ACCESS_KEY_ID
               secret_access_key:
                 valueFrom:
                   - secretRef:
                       name: loki-secret
+                      key: AWS_SECRET_ACCESS_KEY
               s3forcepathstyle: true
           ring:
             kvstore:
