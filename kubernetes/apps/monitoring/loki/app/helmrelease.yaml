@@ -65,14 +65,14 @@ spec:
               region: us-east-2
               access_key_id:
                 valueFrom:
-                  - secretRef:
-                      name: loki-secret
-                      key: AWS_ACCESS_KEY_ID
+                  secretKeyRef:
+                    name: loki-secret
+                    key: AWS_ACCESS_KEY_ID
               secret_access_key:
                 valueFrom:
-                  - secretRef:
-                      name: loki-secret
-                      key: AWS_SECRET_ACCESS_KEY
+                  secretKeyRef:
+                    name: loki-secret
+                    key: AWS_SECRET_ACCESS_KEY
               s3forcepathstyle: true
           ring:
             kvstore:
