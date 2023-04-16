@@ -63,16 +63,6 @@ spec:
             s3:
               bucketnames: ["phekno-loki"]
               region: us-east-2
-              access_key_id:
-                valueFrom:
-                  secretKeyRef:
-                    name: loki-secret
-                    key: AWS_ACCESS_KEY_ID
-              secret_access_key:
-                valueFrom:
-                  secretKeyRef:
-                    name: loki-secret
-                    key: AWS_SECRET_ACCESS_KEY
               s3forcepathstyle: true
           ring:
             kvstore:
@@ -168,3 +158,13 @@ spec:
         enabled: false
     test:
       enabled: false
+
+  valuesFrom:
+    - kind: Secret
+      name: loki-secret
+      valuesKey: AWS_ACCESS_KEY_ID
+      targetPath: common.storage.s3.access_key_id
+    - kind: Secret
+      name: loki-secret
+      valuesKey: AWS_SECRET_ACCESS_KEY
+      targetPath: common.storage.s3.secret_access_key
