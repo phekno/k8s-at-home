@@ -162,9 +162,9 @@ spec:
   valuesFrom:
     - kind: Secret
       name: loki-secret
-      valuesKey: AWS_ACCESS_KEY_ID
+      valuesKey: aws-access-key-id
       targetPath: loki.structuredConfig.common.storage.s3.access_key_id
     - kind: Secret
       name: loki-secret
-      valuesKey: AWS_SECRET_ACCESS_KEY
+      valuesKey: aws-secret-access-key
       targetPath: loki.structuredConfig.common.storage.s3.secret_access_key
