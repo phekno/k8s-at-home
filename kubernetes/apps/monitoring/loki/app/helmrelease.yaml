@@ -35,7 +35,8 @@ spec:
           http_listen_port: 3100
           grpc_listen_port: 9095
         memberlist:
-          join_members: ["loki-memberlist"]
+          join_members:
+            - loki-gossip-ring.loki.svc.cluster.local:7946
         limits_config:
           retention_period: 7d
           enforce_metric_name: false
