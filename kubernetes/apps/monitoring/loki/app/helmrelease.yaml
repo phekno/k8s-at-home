@@ -165,6 +165,10 @@ spec:
       targetPath: loki.structuredConfig.common.storage.s3.bucketnames
     - kind: Secret
       name: loki-secret
+      valuesKey: bucket-region
+      targetPath: loki.structuredConfig.common.storage.s3.region
+    - kind: Secret
+      name: loki-secret
       valuesKey: aws-access-key-id
       targetPath: loki.structuredConfig.common.storage.s3.access_key_id
     - kind: Secret
