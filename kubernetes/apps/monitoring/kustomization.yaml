@@ -7,5 +7,5 @@ resources:
   - ./alertmanager/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./thanos/ks.yaml
-  - ./loki/ks.yaml
+  # - ./loki/ks.yaml
   - ./grafana/ks.yaml
