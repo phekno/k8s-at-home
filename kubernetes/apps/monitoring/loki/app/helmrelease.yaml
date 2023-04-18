@@ -36,7 +36,7 @@ spec:
           grpc_listen_port: 9095
         memberlist:
           join_members:
-            - loki-memberlist
+            - loki-gossip-ring.loki.monitoring.svc.cluster.local:7946
         limits_config:
           retention_period: 14d
           enforce_metric_name: false
