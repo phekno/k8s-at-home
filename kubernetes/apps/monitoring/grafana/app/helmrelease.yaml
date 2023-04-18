@@ -113,7 +113,7 @@ spec:
           - name: Prometheus
             type: prometheus
             access: proxy
-            url: http://thanos-query-frontend.monitoring.svc.cluster.local:9090
+            url: http://kube-prometheus-stack.monitoring.svc.cluster.local:9090
             # url: http://thanos-query-frontend.monitoring.svc.cluster.local:10902
             isDefault: true
           - name: Loki
@@ -140,11 +140,11 @@ spec:
           gnetId: 7845
           revision: 4
           datasource: Prometheus
-        # Ref: https://grafana.com/grafana/dashboards/13502-minio-dashboard/
-        minio:
-          gnetId: 13502
-          revision: 21
-          datasource: Prometheus
+        # # Ref: https://grafana.com/grafana/dashboards/13502-minio-dashboard/
+        # minio:
+        #   gnetId: 13502
+        #   revision: 21
+        #   datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/1860-node-exporter-full/
         node-exporter-full:
           gnetId: 1860
@@ -155,21 +155,21 @@ spec:
           gnetId: 763
           revision: 4
           datasource: Prometheus
-        # Ref: https://grafana.com/grafana/dashboards/5342-ceph-pools/
-        ceph-pools:
-          gnetId: 5342
-          revision: 9
-          datasource: Prometheus
-        # Ref: https://grafana.com/grafana/dashboards/5336-ceph-osd-single/
-        ceph-osd:
-          gnetId: 5336
-          revision: 9
-          datasource: Prometheus
-        # Ref: https://grafana.com/grafana/dashboards/2842-ceph-cluster/
-        ceph-cluster:
-          gnetId: 2842
-          revision: 16
-          datasource: Prometheus
+        # # Ref: https://grafana.com/grafana/dashboards/5342-ceph-pools/
+        # ceph-pools:
+        #   gnetId: 5342
+        #   revision: 9
+        #   datasource: Prometheus
+        # # Ref: https://grafana.com/grafana/dashboards/5336-ceph-osd-single/
+        # ceph-osd:
+        #   gnetId: 5336
+        #   revision: 9
+        #   datasource: Prometheus
+        # # Ref: https://grafana.com/grafana/dashboards/2842-ceph-cluster/
+        # ceph-cluster:
+        #   gnetId: 2842
+        #   revision: 16
+        #   datasource: Prometheus
         cert-manager:
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
           datasource: Prometheus
@@ -239,13 +239,13 @@ spec:
       networkPolicy:
         limitIngress: false
       serviceMonitor:
-        enabled: true
+        enabled: false
     persistence:
       enabled: false
-    topologySpreadConstraints:
-      - maxSkew: 1
-        topologyKey: kubernetes.io/hostname
-        whenUnsatisfiable: DoNotSchedule
-        labelSelector:
-          matchLabels:
-            app.kubernetes.io/name: grafana
+    # topologySpreadConstraints:
+    #   - maxSkew: 1
+    #     topologyKey: kubernetes.io/hostname
+    #     whenUnsatisfiable: DoNotSchedule
+    #     labelSelector:
+    #       matchLabels:
+    #         app.kubernetes.io/name: grafana
