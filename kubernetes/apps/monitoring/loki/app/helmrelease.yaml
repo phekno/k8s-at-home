@@ -34,9 +34,6 @@ spec:
           log_level: info
           http_listen_port: 3100
           grpc_listen_port: 9095
-        memberlist:
-          join_members:
-            - loki-gossip-ring.loki.monitoring.svc.cluster.local:7946
         limits_config:
           retention_period: 14d
           enforce_metric_name: false
@@ -52,7 +49,7 @@ spec:
           configs:
             - from: "2021-08-01"
               store: boltdb-shipper
-              object_store: s3
+              object_store: filesystem
               schema: v11
               index:
                 prefix: loki_index_
@@ -60,45 +57,45 @@ spec:
         common:
           path_prefix: /var/loki
           replication_factor: 1
-          storage:
-            s3:
-              s3: null
-              s3forcepathstyle: true
+          # storage:
+          #   s3:
+          #     s3: null
+          #     s3forcepathstyle: true
           ring:
             instance_addr: 127.0.0.1
             kvstore:
-              store: memberlist
-        ruler:
-          enable_api: true
-          enable_alertmanager_v2: true
-          alertmanager_url: http://kube-prometheus-stack-alertmanager:9093
-          storage:
-            type: local
-            local:
-              directory: /rules
-          rule_path: /tmp/scratch
-          ring:
-            kvstore:
-              store: memberlist
-        distributor:
-          ring:
-            kvstore:
-              store: memberlist
-        compactor:
-          working_directory: /var/loki/boltdb-shipper-compactor
-          shared_store: s3
-          compaction_interval: 10m
-          retention_enabled: true
-          retention_delete_delay: 2h
-          retention_delete_worker_count: 150
-        ingester:
-          max_chunk_age: 1h
-          lifecycler:
-            ring:
-              kvstore:
-                store: memberlist
-        analytics:
-          reporting_enabled: false
+              store: inmemory
+        # ruler:
+        #   enable_api: true
+        #   enable_alertmanager_v2: true
+        #   alertmanager_url: http://kube-prometheus-stack-alertmanager:9093
+        #   storage:
+        #     type: local
+        #     local:
+        #       directory: /rules
+        #   rule_path: /tmp/scratch
+        #   ring:
+        #     kvstore:
+        #       store: inmemory
+        # distributor:
+        #   ring:
+        #     kvstore:
+        #       store: inmemory
+        # compactor:
+        #   working_directory: /var/loki/boltdb-shipper-compactor
+        #   shared_store: s3
+        #   compaction_interval: 10m
+        #   retention_enabled: true
+        #   retention_delete_delay: 2h
+        #   retention_delete_worker_count: 150
+        # ingester:
+        #   max_chunk_age: 1h
+        #   lifecycler:
+        #     ring:
+        #       kvstore:
+        #         store: inmemory
+        # analytics:
+        #   reporting_enabled: false
     gateway:
       replicas: 1
       # TODO: https://github.com/grafana/loki/pull/8187
