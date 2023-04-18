@@ -34,7 +34,7 @@ spec:
         envFrom:
           - secretRef:
               name: grafana-secret
-    replicas: 3
+    replicas: 1
     rbac:
       pspEnabled: false
     testFramework:
@@ -234,8 +234,8 @@ spec:
         - hosts:
             - *host
     imageRenderer:
-      enabled: true
-      replicas: 3
+      enabled: false
+      replicas: 1
       networkPolicy:
         limitIngress: false
       serviceMonitor:
