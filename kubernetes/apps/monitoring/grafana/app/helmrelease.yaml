@@ -39,8 +39,8 @@ spec:
       pspEnabled: false
     testFramework:
       enabled: false
-    admin:
-      existingSecret: grafana-secret
+    # admin:
+    #   existingSecret: grafana-secret
     env:
       GF_ANALYTICS_CHECK_FOR_UPDATES: false
       GF_AUTH_GENERIC_OAUTH_API_URL: https://auth.phekno.io/api/oidc/userinfo
