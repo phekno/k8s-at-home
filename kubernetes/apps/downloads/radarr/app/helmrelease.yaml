@@ -114,6 +114,13 @@ spec:
         mountPath: /scripts/pushover-notify.sh
         defaultMode: 0775
         readOnly: true
+      downloads:
+        enabled: true
+        type: nfs
+        server: 10.100.50.5
+        path: /export/pool/nzbget_downloads
+        mountPath: /config/Downloads
+
     resources:
       requests:
         cpu: 10m
