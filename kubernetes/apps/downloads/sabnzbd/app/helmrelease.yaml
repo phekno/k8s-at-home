@@ -88,7 +88,7 @@ spec:
       media:
         enabled: true
         type: nfs
-        server: "10.100.50.5"
+        server: 10.100.50.5
         path: /export/pool/video
         mountPath: /media
       downloads:
