@@ -71,7 +71,7 @@ spec:
             sub_filter '</head>' '<link rel="stylesheet" type="text/css" href="https://theme-park.bjw-s.dev/css/base/sabnzbd/nord.css"></head>';
             sub_filter_once on;
         hosts:
-          - host: &host "sabnzbd.phekno.io"
+          - host: &host "sabnzbd.${SECRET_DOMAIN}"
             paths:
               - path: /
         tls:
@@ -85,12 +85,12 @@ spec:
       # config:
       #   enabled: true
       #   existingClaim: sabnzbd-config
-      # media:
-      #   enabled: true
-      #   type: nfs
-      #   server: "10.100.50.5"
-      #   path: /pool/media
-      #   mountPath: /media
+      media:
+        enabled: true
+        type: nfs
+        server: "10.100.50.5"
+        path: /export/pool/video
+        mountPath: /media
 
     resources:
       requests:
