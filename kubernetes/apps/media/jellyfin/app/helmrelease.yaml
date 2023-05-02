@@ -100,9 +100,9 @@ spec:
         server: 10.100.50.5
         path: /export/pool/video
         mountPath: /media
-    nodeSelector:
-      node-role.kubernetes.io/worker: "true"
-      # intel.feature.node.kubernetes.io/gpu: "true"
+    # nodeSelector:
+    # node-role.kubernetes.io/worker: "true"
+    # intel.feature.node.kubernetes.io/gpu: "true"
     resources:
       requests:
         # gpu.intel.com/i915: 1
