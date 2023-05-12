@@ -5,8 +5,9 @@ resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
   # Flux-Kustomizations
-  - ./overseerr/ks.yaml
-  # - ./prowlarr/ks.yaml
+  # Apparently overseerr only works with Plex :(
+  # - ./overseerr/ks.yaml
+  - ./prowlarr/ks.yaml
   - ./radarr/ks.yaml
   # - ./readarr/ks.yaml
   # - ./recyclarr/ks.yaml
