@@ -2,29 +2,29 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "phekno-io-production"
+  name: "${SECRET_DOMAIN/./-}-production"
   namespace: networking
 spec:
-  secretName: "phekno-io-production-tls"
+  secretName: "${SECRET_DOMAIN/./-}-production-tls"
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
-  commonName: "phekno.io"
+  commonName: "${SECRET_DOMAIN}"
   dnsNames:
-    - "phekno.io"
-    - "*.phekno.io"
+    - "${SECRET_DOMAIN}"
+    - "*.${SECRET_DOMAIN}"
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "phekno-io-staging"
+  name: "${SECRET_DOMAIN/./-}-staging"
   namespace: networking
 spec:
-  secretName: "phekno-io-staging-tls"
+  secretName: "${SECRET_DOMAIN/./-}-staging-tls"
   issuerRef:
     name: letsencrypt-staging
     kind: ClusterIssuer
-  commonName: "phekno.io"
+  commonName: "${SECRET_DOMAIN}"
   dnsNames:
-    - "phekno.io"
-    - "*.phekno.io"
+    - "${SECRET_DOMAIN}"
+    - "*.${SECRET_DOMAIN}"
