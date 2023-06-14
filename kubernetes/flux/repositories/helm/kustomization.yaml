@@ -5,6 +5,7 @@ resources:
   - ./authentik.yaml
   - ./bitnami.yaml
   - ./bjw-s.yaml
+  - ./cilium.yaml
   - ./cloudnative-pg.yaml
   - ./csi-driver-nfs.yaml
   - ./external-dns.yaml
