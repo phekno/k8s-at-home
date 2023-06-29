@@ -32,7 +32,7 @@ spec:
       defaultClass: false
     nodePathMap:
       - node: DEFAULT_PATH_FOR_NON_LISTED_NODES
-        paths: ["/mnt/q", "/mnt/r", "/mnt/s", "/mnt/t", "/mnt/u"]
+        paths: ["/mnt/r", "/mnt/s", "/mnt/u"]
     # Note: Do not enable Flux variable substitution on this HelmRelease
     configmap:
       setup: |-
