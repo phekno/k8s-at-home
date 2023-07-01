@@ -93,7 +93,7 @@ spec:
         enabled: true
         type: nfs
         server: 10.100.50.5
-        path: /export/pool/video
+        path: /tank/video
     resources:
       requests:
         # gpu.intel.com/i915: 1

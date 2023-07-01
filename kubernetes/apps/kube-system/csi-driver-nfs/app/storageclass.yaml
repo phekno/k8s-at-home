@@ -9,7 +9,7 @@ metadata:
 provisioner: nfs.csi.k8s.io
 parameters:
   server: 10.100.50.5
-  share: /export/pool
+  share: /tank
 reclaimPolicy: Retain
 volumeBindingMode: Immediate
 # Note: The first two options are strictly for NFSv4.2

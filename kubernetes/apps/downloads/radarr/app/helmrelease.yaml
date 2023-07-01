@@ -98,7 +98,7 @@ spec:
         enabled: true
         type: nfs
         server: 10.100.50.5
-        path: /export/pool/video
+        path: /tank/video
         mountPath: /media
       scripts:
         enabled: true
@@ -112,7 +112,7 @@ spec:
         enabled: true
         type: nfs
         server: 10.100.50.5
-        path: /export/pool/nzbget_downloads
+        path: /tank/nzbget_downloads
         mountPath: /config/Downloads
 
     resources:
