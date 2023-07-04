@@ -6,8 +6,8 @@ metadata:
   name: cluster-apps-authentik
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: cluster-apps-redis
+  # dependsOn:
+  #   - name: cluster-apps-redis
   path: "./kubernetes/apps/security/authentik/app"
   prune: true
   sourceRef:
