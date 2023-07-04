@@ -42,6 +42,7 @@ spec:
     authentik:
       email:
         use_ssl: true
+        port: "587"
         from: "Authentik <auth@${SECRET_DOMAIN}>"
       log_level: debug
       error_reporting:
@@ -135,10 +136,10 @@ spec:
       name: *secret
       valuesKey: SMTP_PASSWORD
       targetPath: authentik.email.password
-    - kind: Secret
-      name: *secret
-      valuesKey: SMTP_PORT
-      targetPath: authentik.email.port
+    # - kind: Secret
+    #   name: *secret
+    #   valuesKey: SMTP_PORT
+    #   targetPath: authentik.email.port
     - kind: Secret
       name: *secret
       valuesKey: POSTGRES_HOST
