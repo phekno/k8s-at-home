@@ -64,7 +64,7 @@ spec:
       - secretRef:
           name: authentik-secret
     postgresql:
-      enabled: false
+      enabled: true
     initContainers:
       init-db:
         image: ghcr.io/onedr0p/postgres-initdb:14.8
