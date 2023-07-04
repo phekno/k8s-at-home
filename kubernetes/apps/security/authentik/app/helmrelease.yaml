@@ -40,16 +40,40 @@ spec:
     worker:
       replicas: 1
     authentik:
-      email:
-        use_ssl: true
-        from: "Authentik <auth@${SECRET_DOMAIN}>"
-      log_level: debug
+      worker:
+        replicas: 1
       error_reporting:
         enabled: false
-      postgresql:
-        host: postgres-rw.default.svc.cluster.local
-      redis:
-        host: redis-master.default.svc.cluster.local
+      log_level: trace
+      email:
+        use_ssl: true
+    redis:
+      enabled: true
+      auth:
+        enabled: true
+      global:
+        storageClass: local-path
+      architecture: replication
+      replica:
+        podAntiAffinityPreset: hard
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+    envFrom:
+      - secretRef:
+          name: authentik-secret
+    postgresql:
+      enabled: false
+    initContainers:
+      init-db:
+        image: ghcr.io/onedr0p/postgres-initdb:14.8
+        imagePullPolicy: IfNotPresent
+        envFrom:
+          - secretRef:
+              name: authentik-secret
+    geoip:
+      enabled: true
     ingress:
       enabled: true
       ingressClassName: public
@@ -78,22 +102,14 @@ spec:
           memory: 1200Mi
   valuesFrom:
     - kind: Secret
-      name: *secret
-      valuesKey: AUTHENTIK_SECRET_KEY
-      targetPath: authentik.secret_key
+      targetPath: redis.global.redis.password
+      name: authentik-secret
+      valuesKey: AUTHENTIK_REDIS__PASSWORD
     - kind: Secret
-      name: *secret
-      valuesKey: SMTP_HOST
-      targetPath: authentik.email.host
+      targetPath: geoip.accountId
+      name: authentik-secret
+      valuesKey: MAXMIND_ACCOUNT_ID
     - kind: Secret
-      name: *secret
-      valuesKey: SMTP_USERNAME
-      targetPath: authentik.email.username
-    - kind: Secret
-      name: *secret
-      valuesKey: SMTP_PASSWORD
-      targetPath: authentik.email.password
-    - kind: Secret
-      name: *secret
-      valuesKey: POSTGRES_PASS
-      targetPath: authentik.postgresql.password
+      targetPath: geoip.licenseKey
+      name: authentik-secret
+      valuesKey: MAXMIND_LICENSE_KEY
