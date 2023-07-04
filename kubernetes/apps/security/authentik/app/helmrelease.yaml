@@ -46,6 +46,8 @@ spec:
       log_level: debug
       error_reporting:
         enabled: false
+      postgresql:
+        host: postgres-rw.default.svc.cluster.local
     ingress:
       enabled: true
       ingressClassName: public
@@ -93,17 +95,5 @@ spec:
       targetPath: authentik.email.password
     - kind: Secret
       name: *secret
-      valuesKey: POSTGRES_HOST
-      targetPath: authentik.postgresql.host
-    - kind: Secret
-      name: *secret
-      valuesKey: POSTGRES_USER
-      targetPath: authentik.postgresql.user
-    - kind: Secret
-      name: *secret
       valuesKey: POSTGRES_PASS
       targetPath: authentik.postgresql.password
-    - kind: Secret
-      name: *secret
-      valuesKey: POSTGRES_DB
-      targetPath: authentik.postgresql.name
