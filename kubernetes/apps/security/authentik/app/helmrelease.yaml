@@ -42,11 +42,12 @@ spec:
     authentik:
       email:
         use_ssl: true
-        port: "587"
         from: "Authentik <auth@${SECRET_DOMAIN}>"
       log_level: debug
       error_reporting:
         enabled: false
+      redis:
+        host: redis.default.svc.cluster.local
     ingress:
       enabled: true
       ingressClassName: public
@@ -77,21 +78,17 @@ spec:
           memory: 500Mi
         limits:
           memory: 1200Mi
-    # volumes:
-    #   - name: authentik-media
-    #     persistentVolumeClaim:
-    #       claimName: authentik-media
-    # volumeMounts:
-    #   - name: authentik-media
-    #     mountPath: /media
-    #     subPath: media
-    #   - name: authentik-media
-    #     mountPath: /templates
-    #     subPath: custom-templates
-    redis:
-      enabled: true
-      auth:
-        enabled: false
+      # volumes:
+      #   - name: authentik-media
+      #     persistentVolumeClaim:
+      #       claimName: authentik-media
+      # volumeMounts:
+      #   - name: authentik-media
+      #     mountPath: /media
+      #     subPath: media
+      #   - name: authentik-media
+      #     mountPath: /templates
+      #     subPath: custom-templates
       master:
         persistence:
           enabled: true
@@ -136,10 +133,6 @@ spec:
       name: *secret
       valuesKey: SMTP_PASSWORD
       targetPath: authentik.email.password
-    # - kind: Secret
-    #   name: *secret
-    #   valuesKey: SMTP_PORT
-    #   targetPath: authentik.email.port
     - kind: Secret
       name: *secret
       valuesKey: POSTGRES_HOST
