@@ -49,7 +49,7 @@ spec:
       postgresql:
         host: postgres-rw.default.svc.cluster.local
       redis:
-        host: redis-headless.default.svc.cluster.local
+        host: redis-master.default.svc.cluster.local
     ingress:
       enabled: true
       ingressClassName: public
