@@ -30,12 +30,12 @@ spec:
     controller:
       annotations:
         secret.reloader.stakater.com/reload: &secret authentik-secret
-    initContainers:
-      init-db:
-        image: ghcr.io/onedr0p/postgres-init:14.8
-        envFrom:
-          - secretRef:
-              name: *secret
+    # initContainers:
+    #   init-db:
+    #     image: ghcr.io/onedr0p/postgres-init:14.8
+    #     envFrom:
+    #       - secretRef:
+    #           name: *secret
     replicas: 1
     worker:
       replicas: 1
