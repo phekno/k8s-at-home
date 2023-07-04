@@ -46,8 +46,6 @@ spec:
       log_level: debug
       error_reporting:
         enabled: false
-      redis:
-        host: redis.default.svc.cluster.local
     ingress:
       enabled: true
       ingressClassName: public
@@ -89,33 +87,35 @@ spec:
       #   - name: authentik-media
       #     mountPath: /templates
       #     subPath: custom-templates
-      master:
-        persistence:
-          enabled: true
-          size: 1Gi
-        resources:
-          requests:
-            cpu: 15m
-            memory: 50Mi
-          limits:
-            memory: 100Mi
-      commonConfiguration: |-
-        # Enable AOF https://redis.io/topics/persistence#append-only-file
-        appendonly yes
-        # Disable RDB persistence, AOF persistence already enabled.
-        save ""
-        maxmemory 94371840
-        maxmemory-policy allkeys-lru
-      metrics:
+      redis:
         enabled: true
-        serviceMonitor:
-          enabled: true
-        resources:
-          requests:
-            cpu: 10m
-            memory: 10Mi
-          limits:
-            memory: 20Mi
+      # master:
+      #   persistence:
+      #     enabled: true
+      #     size: 1Gi
+      #   resources:
+      #     requests:
+      #       cpu: 15m
+      #       memory: 50Mi
+      #     limits:
+      #       memory: 100Mi
+      # commonConfiguration: |-
+      #   # Enable AOF https://redis.io/topics/persistence#append-only-file
+      #   appendonly yes
+      #   # Disable RDB persistence, AOF persistence already enabled.
+      #   save ""
+      #   maxmemory 94371840
+      #   maxmemory-policy allkeys-lru
+      # metrics:
+      #   enabled: true
+      #   serviceMonitor:
+      #     enabled: true
+      #   resources:
+      #     requests:
+      #       cpu: 10m
+      #       memory: 10Mi
+      #     limits:
+      #       memory: 20Mi
   valuesFrom:
     - kind: Secret
       name: *secret
