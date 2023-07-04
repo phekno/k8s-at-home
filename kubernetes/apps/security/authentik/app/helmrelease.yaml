@@ -47,7 +47,7 @@ spec:
       error_reporting:
         enabled: false
       postgresql:
-        host: postgres.default.svc.cluster.local
+        host: postgres-rw.default.svc.cluster.local
     ingress:
       enabled: true
       ingressClassName: public
