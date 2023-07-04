@@ -97,8 +97,8 @@ spec:
     - kind: Secret
       targetPath: geoip.accountId
       name: authentik-secret
-      valuesKey: MAXMIND_ACCOUNT_ID
+      valuesKey: account_id
     - kind: Secret
       targetPath: geoip.licenseKey
       name: authentik-secret
-      valuesKey: MAXMIND_LICENSE_KEY
+      valuesKey: license_key
