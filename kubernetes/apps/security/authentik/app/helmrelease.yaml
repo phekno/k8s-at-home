@@ -49,29 +49,18 @@ spec:
         use_ssl: true
     redis:
       enabled: true
-      auth:
-        enabled: true
-      global:
-        storageClass: local-path
-      architecture: replication
-      replica:
-        podAntiAffinityPreset: hard
-      metrics:
-        enabled: true
-        serviceMonitor:
-          enabled: true
     envFrom:
       - secretRef:
           name: authentik-secret
     postgresql:
       enabled: true
-    initContainers:
-      init-db:
-        image: ghcr.io/onedr0p/postgres-initdb:14.8
-        imagePullPolicy: IfNotPresent
-        envFrom:
-          - secretRef:
-              name: authentik-secret
+    # initContainers:
+    #   init-db:
+    #     image: ghcr.io/onedr0p/postgres-initdb:14.8
+    #     imagePullPolicy: IfNotPresent
+    #     envFrom:
+    #       - secretRef:
+    #           name: authentik-secret
     geoip:
       enabled: true
     ingress:
