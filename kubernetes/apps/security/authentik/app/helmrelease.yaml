@@ -90,10 +90,10 @@ spec:
         limits:
           memory: 1200Mi
   valuesFrom:
-    - kind: Secret
-      targetPath: redis.global.redis.password
-      name: authentik-secret
-      valuesKey: AUTHENTIK_REDIS__PASSWORD
+    # - kind: Secret
+    #   targetPath: redis.global.redis.password
+    #   name: authentik-secret
+    #   valuesKey: AUTHENTIK_REDIS__PASSWORD
     - kind: Secret
       targetPath: geoip.accountId
       name: authentik-secret
