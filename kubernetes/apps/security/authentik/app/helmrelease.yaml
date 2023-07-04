@@ -48,6 +48,8 @@ spec:
         enabled: false
       postgresql:
         host: postgres-rw.default.svc.cluster.local
+      redis:
+        host: redis.default.svc.cluster.local
     ingress:
       enabled: true
       ingressClassName: public
@@ -74,8 +76,6 @@ spec:
           memory: 500Mi
         limits:
           memory: 1200Mi
-      redis:
-        enabled: true
   valuesFrom:
     - kind: Secret
       name: *secret
