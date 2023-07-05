@@ -4,5 +4,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./glauth/ks.yaml
-  # - ./authelia/ks.yaml
-  - ./authentik/ks.yaml
+  - ./authelia/ks.yaml
