@@ -42,7 +42,7 @@ spec:
     image:
       repository: ghcr.io/authelia/authelia
       tag: 4.37
-    args: ["--config", "/config/configuration.yml", "expand-env"]
+    args: ["--config", "/config/configuration.yml"]
     envFrom:
       - secretRef:
           name: authelia-secret
