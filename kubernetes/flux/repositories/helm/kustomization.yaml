@@ -5,7 +5,7 @@ resources:
   - ./bitnami-charts.yaml
   - ./bjw-s.yaml
   - ./cilium.yaml
-  - ./cloudnative-pg.yaml
+  #- ./cloudnative-pg.yaml
   - ./csi-driver-nfs.yaml
   - ./external-dns.yaml
   - ./external-secrets.yaml
