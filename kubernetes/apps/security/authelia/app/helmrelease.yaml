@@ -41,8 +41,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: ghcr.io/authelia/authelia
-      # TODO Switch to Authelia release tag on next release
-      tag: master@sha256:ebc7770ac7f58780097a4d0915dc97fa37070e7537e9b7b286a3472dbce7dc0e
+      tag: 4.37
     args:
       [
         "--config",
