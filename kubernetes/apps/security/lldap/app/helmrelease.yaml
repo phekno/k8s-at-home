@@ -31,7 +31,7 @@ spec:
       01-init-db:
         image: ghcr.io/onedr0p/postgres-init:14.8
         imagePullPolicy: IfNotPresent
-        envFrom: &envFrom
+        envFrom:
           - secretRef:
               name: lldap-secret
     controller:
@@ -48,7 +48,9 @@ spec:
       LLDAP_HTTP_PORT: &port 80
       LLDAP_HTTP_URL: https://lldap.phekno.io
       LLDAP_LDAP_PORT: &ldapPort 389
-    envFrom: *envFrom
+    envFrom:
+      - secretRef:
+          name: lldap-secret
     service:
       main:
         ports:
