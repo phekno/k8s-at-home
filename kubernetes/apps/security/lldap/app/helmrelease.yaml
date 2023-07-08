@@ -51,10 +51,10 @@ spec:
       LLDAP_HTTP_PORT: &port 80
       LLDAP_HTTP_URL: https://lldap.phekno.io
       LLDAP_LDAP_PORT: &ldapPort 389
-      LLDAP_SMTP_OPTIONS__SMTP_EMCRYPTION: "STARTTLS"
+      LLDAP_SMTP_OPTIONS__SMTP_EMCRYPTION: STARTTLS
       LLDAP_SMTP_OPTIONS__FROM: "LLDAP Admin <lldap_admin@phekno.io>"
       LLDAP_SMTP_OPTIONS__REPLY_TO: "Do not reply <noreply@phekno.io>"
-      LLDAP_LDAP_BASE_DN: "dc=phekno,dc=io"
+      LLDAP_LDAP_BASE_DN: dc=home,dc=arpa
     envFrom:
       - secretRef:
           name: lldap-secret
