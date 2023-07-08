@@ -31,9 +31,6 @@ spec:
       01-init-db:
         image: ghcr.io/onedr0p/postgres-init:14.8
         imagePullPolicy: IfNotPresent
-        env:
-          INIT_POSTGRES_DBNAME: "lldap"
-          INIT_POSTGRES_HOST: "postgres-rw.db.svc.cluster.local"
         envFrom:
           - secretRef:
               name: lldap-secret
