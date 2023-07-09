@@ -27,13 +27,13 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    # initContainers:
-    #   01-init-db:
-    #     image: ghcr.io/onedr0p/postgres-init:14.8
-    #     imagePullPolicy: IfNotPresent
-    #     envFrom:
-    #       - secretRef:
-    #           name: lldap-secret
+    initContainers:
+      01-init-db:
+        image: ghcr.io/onedr0p/postgres-init:14.8
+        imagePullPolicy: IfNotPresent
+        envFrom:
+          - secretRef:
+              name: lldap-secret
     controller:
       replicas: 2
       strategy: RollingUpdate
@@ -73,16 +73,16 @@ spec:
         tls:
           - hosts:
               - *host
-    # persistence:
-    #   data:
-    #     enabled: true
-    #     type: emptyDir
-    volumeClaimTemplates:
-      - name: data
-        mountPath: /data
-        accessMode: ReadWriteOnce
-        size: 1Gi
-        storageClass: local-path
+    persistence:
+      data:
+        enabled: true
+        type: emptyDir
+    # volumeClaimTemplates:
+    #   - name: data
+    #     mountPath: /data
+    #     accessMode: ReadWriteOnce
+    #     size: 1Gi
+    #     storageClass: local-path
     topologySpreadConstraints:
       - maxSkew: 1
         topologyKey: kubernetes.io/hostname
