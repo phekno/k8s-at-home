@@ -40,7 +40,7 @@ spec:
       config:
         aws_sdk_auth: true
         bucket: phekno-thanos
-        endpoint: s3.us-east-1.amazonaws.com
+        endpoint: s3.us-east-2.amazonaws.com
     envFrom:
       - secretRef:
           name: thanos-secret
