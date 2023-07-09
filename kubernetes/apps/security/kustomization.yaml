@@ -5,4 +5,4 @@ resources:
   - ./namespace.yaml
   - ./lldap/ks.yaml
   # - ./glauth/ks.yaml
-  # - ./authelia/ks.yaml
+  - ./authelia/ks.yaml

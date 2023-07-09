@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
+# yaml-language-server: $schema=https://kubernetes-schemas.phekno.io/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -30,7 +30,7 @@ spec:
     - name: lldap
       namespace: default
     - name: redis
-      namespace: database
+      namespace: db
   values:
     initContainers:
       01-init-db:
@@ -46,7 +46,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: ghcr.io/authelia/authelia
-      tag: master@sha256:47cabc573f8faaac03d714544d3a8333eea9f6f581e29728bf14ec90e1596c62
+      tag: master@sha256:a3647c3dd136402745c7639e446944004145630c822f27e22f999c414c234d2f
     args:
       [
         "--config",
@@ -63,27 +63,24 @@ spec:
       AUTHELIA_AUTHENTICATION_BACKEND_LDAP_GROUP_NAME_ATTRIBUTE: cn
       AUTHELIA_AUTHENTICATION_BACKEND_LDAP_IMPLEMENTATION: custom
       AUTHELIA_AUTHENTICATION_BACKEND_LDAP_MAIL_ATTRIBUTE: mail
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_START_TLS: "false"
       AUTHELIA_AUTHENTICATION_BACKEND_LDAP_TIMEOUT: 5s
-      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_URL: "ldap://glauth.security.svc.cluster.local:389"
-      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_USER: cn=search,ou=svcaccts,dc=home,dc=arpa
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_URL: ldap://lldap.security.svc.cluster.local:389
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_USER: uid=admin,ou=people,dc=home,dc=arpa
       AUTHELIA_AUTHENTICATION_BACKEND_LDAP_USERNAME_ATTRIBUTE: uid
       AUTHELIA_AUTHENTICATION_BACKEND_LDAP_USERS_FILTER: (&({username_attribute}={input})(objectClass=person))
       AUTHELIA_AUTHENTICATION_BACKEND_PASSWORD_RESET_DISABLE: "true"
       AUTHELIA_AUTHENTICATION_BACKEND_REFRESH_INTERVAL: 1m
-      AUTHELIA_DEFAULT_REDIRECTION_URL: https://auth.devbu.io
+      AUTHELIA_DEFAULT_REDIRECTION_URL: https://auth.phekno.io
       AUTHELIA_DUO_API_DISABLE: "true"
       AUTHELIA_LOG_LEVEL: info
-      AUTHELIA_NOTIFIER_DISABLE_STARTUP_CHECK: "true"
-      AUTHELIA_NOTIFIER_SMTP_DISABLE_REQUIRE_TLS: "true"
-      AUTHELIA_NOTIFIER_SMTP_HOST: smtp-relay.turbo.ac
-      AUTHELIA_NOTIFIER_SMTP_PORT: 25
-      AUTHELIA_NOTIFIER_SMTP_SENDER: Authelia <authelia@buhl.casa>
+      AUTHELIA_NOTIFIER_SMTP_SENDER: Authelia <authelia@phekno.io>
       AUTHELIA_SERVER_DISABLE_HEALTHCHECK: "true"
       AUTHELIA_SERVER_PORT: &port 80
-      AUTHELIA_SESSION_DOMAIN: devbu.io
-      AUTHELIA_SESSION_NAME: authelia-home-ops
+      AUTHELIA_SESSION_DOMAIN: phekno.io
+      AUTHELIA_SESSION_NAME: authelia-phekno
       AUTHELIA_SESSION_REDIS_DATABASE_INDEX: 14
-      AUTHELIA_SESSION_REDIS_HOST: redis.database.svc.cluster.local
+      AUTHELIA_SESSION_REDIS_HOST: redis.db.svc.cluster.local
       AUTHELIA_TELEMETRY_METRICS_ADDRESS: tcp://0.0.0.0:8080
       AUTHELIA_TELEMETRY_METRICS_ENABLED: "true"
       AUTHELIA_THEME: dark
@@ -128,14 +125,14 @@ spec:
         enabled: true
         ingressClassName: nginx
         annotations:
-          external-dns.alpha.kubernetes.io/target: ingress.devbu.io
+          external-dns.alpha.kubernetes.io/target: ingress.phekno.io
           nginx.ingress.kubernetes.io/configuration-snippet: |
             add_header Cache-Control "no-store";
             add_header Pragma "no-cache";
             add_header X-Frame-Options "SAMEORIGIN";
             add_header X-XSS-Protection "1; mode=block";
         hosts:
-          - host: &host auth.devbu.io
+          - host: &host auth.phekno.io
             paths:
               - path: /
                 pathType: Prefix

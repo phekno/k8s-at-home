@@ -2,21 +2,16 @@
 # yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: security
+namespace: default
 resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
-patchesStrategicMerge:
-  - ./patches/env.yaml
+  # - ./gatus.yaml
 configMapGenerator:
   - name: authelia-configmap
     files:
-      - ./config/configuration.yml
+      - configuration.yaml=./config/configuration.yaml
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
     kustomize.toolkit.fluxcd.io/substitute: disabled
-labels:
-  - pairs:
-      app.kubernetes.io/name: authelia
-      app.kubernetes.io/instance: authelia
