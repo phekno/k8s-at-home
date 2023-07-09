@@ -100,7 +100,7 @@ spec:
         size: 20Gi
     ruler:
       enabled: true
-      replicaCount: 3
+      replicaCount: 1
       replicaLabel: __replica__
       alertmanagers:
         [
