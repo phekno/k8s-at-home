@@ -81,7 +81,7 @@ spec:
                 period: 24h
         common:
           path_prefix: /var/loki
-          replication_factor: 3
+          replication_factor: 1
           ring:
             kvstore:
               store: memberlist
@@ -132,6 +132,7 @@ spec:
           - hosts:
               - *host
     read:
+      replicas: 1
       persistence:
         storageClass: local-path
       extraVolumeMounts:
@@ -141,9 +142,11 @@ spec:
         - name: rules
           emptyDir: {}
     write:
+      replicas: 1
       persistence:
         storageClass: local-path
     backend:
+      replicas: 1
       persistence:
         storageClass: local-path
       extraVolumeMounts:
