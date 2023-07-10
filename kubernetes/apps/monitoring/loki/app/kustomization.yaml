@@ -5,10 +5,5 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ./externalsecret.yaml
+  - ./configmap.yaml
   - ./helmrelease.yaml
-  # - ./configmap.yaml
-  # - ./objectbucketclaim.yaml
-labels:
-  - pairs:
-      app.kubernetes.io/name: loki
-      app.kubernetes.io/instance: loki
