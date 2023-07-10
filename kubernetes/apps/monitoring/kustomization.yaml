@@ -8,5 +8,5 @@ resources:
   - ./gatus/ks.yaml
   - ./thanos/ks.yaml
   - ./vector/ks.yaml
-  # - ./grafana/ks.yaml
+  - ./grafana/ks.yaml
   - ./loki/ks.yaml
