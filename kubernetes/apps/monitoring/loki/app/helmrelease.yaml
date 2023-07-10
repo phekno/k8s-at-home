@@ -65,9 +65,6 @@ spec:
         common:
           path_prefix: /var/loki
           replication_factor: 1
-          storage:
-            s3:
-              signature_version: v4
           ring:
             kvstore:
               store: memberlist
