@@ -48,3 +48,8 @@ spec:
     cacheStorageClassName: openebs-hostpath
     destinationPVC: radarr
     copyMethod: Direct
+    moverSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+
