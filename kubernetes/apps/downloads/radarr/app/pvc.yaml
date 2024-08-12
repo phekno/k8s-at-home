@@ -26,12 +26,14 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: radarr
+  namespace: downloads
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
+  storageClassName: openebs-hostpath
 ---
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
