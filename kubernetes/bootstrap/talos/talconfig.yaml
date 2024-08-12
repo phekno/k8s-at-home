@@ -22,14 +22,19 @@ cniConfig:
 
 nodes:
   - hostname: "kubernetes-0"
-    ipAddress: ""
+    ipAddress: "10.100.50.100"
     installDisk: "/dev/sdb"
     talosImageURL: factory.talos.dev/installer/2d61dd07b20062062ea671b4d01873506103b67c0f7a4c3fb6cf4ee85585dcb8
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "c8:1f:66:e1:0b:b3"
-        dhcp: true
+        dhcp: false
+        addresses:
+          - "10.100.50.100/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "10.100.50.1"
         mtu: 1500
         vip:
           ip: "10.100.50.150"
