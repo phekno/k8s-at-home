@@ -45,5 +45,6 @@ spec:
   restic:
     repository: radarr-restic-secret
     # Use an existing PVC, don't provision a new one
+    cacheStorageClassName: openebs-hostpath
     destinationPVC: radarr
     copyMethod: Direct
