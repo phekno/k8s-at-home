@@ -68,7 +68,7 @@ spec:
     persistence:
       config:
         enabled: true
-        type: openebs-hostpath
+        type: emptyDir
         # existingClaim: pgadmin
         # globalMounts:
         #   - path: /var/lib/pgadmin
