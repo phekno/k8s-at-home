@@ -38,6 +38,40 @@ nodes:
         mtu: 1500
         vip:
           ip: "10.100.50.150"
+  - hostname: "kubernetes-1"
+    ipAddress: "10.100.50.101"
+    installDisk: "/dev/sdb"
+    talosImageURL: factory.talos.dev/installer/2d61dd07b20062062ea671b4d01873506103b67c0f7a4c3fb6cf4ee85585dcb8
+    controlPlane: true
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "5c:f3:fc:36:b1:94"
+        dhcp: false
+        addresses:
+          - "10.100.50.101/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "10.100.50.1"
+        mtu: 1500
+        vip:
+          ip: "10.100.50.150"
+  - hostname: "kubernetes-2"
+    ipAddress: "10.100.50.102"
+    installDisk: "/dev/sdb"
+    talosImageURL: factory.talos.dev/installer/4d85c6d034a422ff186a3613e05d444cd3e0602731164a25a7445cedc90dcae8
+    controlPlane: true
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "b0:83:fe:d2:6a:b1"
+        dhcp: false
+        addresses:
+          - "10.100.50.102/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "10.100.50.1"
+        mtu: 1500
+        vip:
+          ip: "10.100.50.150"
 
 # Global patches
 patches:
