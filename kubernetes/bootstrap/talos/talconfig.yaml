@@ -24,7 +24,7 @@ nodes:
   - hostname: "kubernetes-0"
     ipAddress: "10.100.50.100"
     installDisk: "/dev/sdb"
-    talosImageURL: factory.talos.dev/installer/2d61dd07b20062062ea671b4d01873506103b67c0f7a4c3fb6cf4ee85585dcb8
+    talosImageURL: factory.talos.dev/installer/4623c3cdf085f67455ec0e098c10c59b271dfc9c443a1db3ccbde4f755175183
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
@@ -41,7 +41,7 @@ nodes:
   - hostname: "kubernetes-1"
     ipAddress: "10.100.50.101"
     installDisk: "/dev/sdb"
-    talosImageURL: factory.talos.dev/installer/2d61dd07b20062062ea671b4d01873506103b67c0f7a4c3fb6cf4ee85585dcb8
+    talosImageURL: factory.talos.dev/installer/4623c3cdf085f67455ec0e098c10c59b271dfc9c443a1db3ccbde4f755175183
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
@@ -58,7 +58,7 @@ nodes:
   - hostname: "kubernetes-2"
     ipAddress: "10.100.50.102"
     installDisk: "/dev/sdb"
-    talosImageURL: factory.talos.dev/installer/4d85c6d034a422ff186a3613e05d444cd3e0602731164a25a7445cedc90dcae8
+    talosImageURL: factory.talos.dev/installer/4623c3cdf085f67455ec0e098c10c59b271dfc9c443a1db3ccbde4f755175183
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
