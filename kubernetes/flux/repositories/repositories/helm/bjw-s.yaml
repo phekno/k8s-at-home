@@ -2,8 +2,9 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: jetstack
+  name: bjw-s
   namespace: flux-system
 spec:
-  interval: 1h
-  url: https://charts.jetstack.io/
+  type: oci
+  interval: 5m
+  url: oci://ghcr.io/bjw-s/helm

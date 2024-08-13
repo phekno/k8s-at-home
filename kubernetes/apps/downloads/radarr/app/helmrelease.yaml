@@ -103,18 +103,21 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: radarr
+        type: persistentVolumeClaim
+        storageClass: openebs-hostpath
+        size: 10Gi
+        accessMode: ReadWriteOnce
       tmp:
         type: emptyDir
-      # media:
-      #   enabled: true
-      #   type: nfs
-      #   server: 10.100.50.5
-      #   path: /tank/video
-      # downloads:
-      #   enabled: true
-      #   type: nfs
-      #   server: 10.100.50.5
-      #   path: /tank/nzbget_downloads
-      #   globalMounts:
-      #     - path: /config/Downloads
+      media:
+        enabled: true
+        type: nfs
+        server: 10.100.50.5
+        path: /tank/video
+      downloads:
+        enabled: true
+        type: nfs
+        server: 10.100.50.5
+        path: /tank/nzbget_downloads
+        globalMounts:
+          - path: /config/Downloads

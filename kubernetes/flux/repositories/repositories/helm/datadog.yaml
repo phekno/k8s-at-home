@@ -2,8 +2,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: jetstack
+  name: datadog
   namespace: flux-system
 spec:
   interval: 1h
-  url: https://charts.jetstack.io/
+  url: https://helm.datadoghq.com
