@@ -1,50 +1,41 @@
-# ⛵ Cluster Template
+# ⛵ Home Kubernetes
 
-Welcome to my opinionated and extensible template for deploying a single Kubernetes cluster. The goal of this project is to make it easier for people interested in using Kubernetes to deploy a cluster at home on bare-metal or VMs.
-
-At a high level this project makes use of [makejinja](https://github.com/mirkolenz/makejinja) to read in a [configuration file](./config.sample.yaml) which renders out templates that will allow you to install and manage your Kubernetes cluster with.
+This my implementation of a home Kubernetes cluster based on Talos Linux.  It was templated from  [cluster-template](https://github.com/onedr0p/cluster-template) by [onedr0p](https://github.com/onedr0p).
 
 ## ✨ Features
 
-The features included will depend on the type of configuration you want to use. There are currently **2 different types** of **configurations** available with this template.
+The stack includes:
 
-1. **"Flux cluster"** - a Kubernetes cluster deployed on-top of [Talos Linux](https://github.com/siderolabs/talos) with an opinionated implementation of [Flux](https://github.com/fluxcd/flux2) using [GitHub](https://github.com/) as the Git provider and [sops](https://github.com/getsops/sops) to manage secrets.
+- [Talos Linux](https://github.com/siderolabs/talos) - base OS (Talos' documentation is utter trash, by the way)
+- [Flux](https://github.com/fluxcd/flux2) - GitOps
+- [GitHub](https://github.com/) - Git repo
+- [sops](https://github.com/getsops/sops) - Local secrets management
+- [Cilium](https://github.com/cilium/cilium) - Networking
+- [cert-manager](https://github.com/cert-manager/cert-manager) - Automatic certificate provisioning
+- [spegel](https://github.com/spegel-org/spegel) - Cluster local OCI registry mirror
+- [reloader](https://github.com/stakater/Reloader) - Watches changes in ConfigMaps or Secrets and does rolling upgrades on Pods
+- [ingress-nginx](https://github.com/kubernetes/ingress-nginx/) - Ingress controller
+- [external-dns](https://github.com/kubernetes-sigs/external-dns) - External DNS for exposed services
+- [cloudflared](https://github.com/cloudflare/cloudflared) - Manages [Cloudflare](https://www.cloudflare.com/) [Tunnel](https://www.cloudflare.com/products/tunnel/)
+- [Renovate](https://www.mend.io/renovate) - Generates PRs for updatates
+- [Longhorn](https://longhorn.io/) - Distributed storage (not awesome, but it does the trick, given my crusty, old hardware)
+- [OpenEBS](https://openebs.io/) - This is/was configured by default from the cluster-template. I chose to replace it with Longhorn (for better or worse)
 
-    - **Required:** Some knowledge of [Containers](https://opencontainers.org/), [YAML](https://yaml.org/), and [Git](https://git-scm.com/).
-    - **Components:** [flux](https://github.com/fluxcd/flux2), [Cilium](https://github.com/cilium/cilium),[cert-manager](https://github.com/cert-manager/cert-manager), [spegel](https://github.com/spegel-org/spegel), [reloader](https://github.com/stakater/Reloader), and [openebs](https://github.com/openebs/openebs).
+## 💻 Hardware
 
-2. **"Flux cluster with Cloudflare"** - An addition to "**Flux cluster**" that provides DNS and SSL with [Cloudflare](https://www.cloudflare.com/). [Cloudflare Tunnel](https://www.cloudflare.com/products/tunnel/) is also included to provide external access to certain applications deployed in your cluster.
+The hardware this runs on is a mix of 12th and 13th gen crusty, old 2U pizza-boxes from Dell and IBM.  There's also another crusty, old 2U Dell that serves as a NAS for all this.
 
-    - **Required:** A Cloudflare account with a domain managed in your Cloudflare account.
-    - **Components:** [ingress-nginx](https://github.com/kubernetes/ingress-nginx/), [external-dns](https://github.com/kubernetes-sigs/external-dns) and [cloudflared](https://github.com/cloudflare/cloudflared).
-
-**Other features include:**
-
-- A [Renovate](https://www.mend.io/renovate)-ready repository with pull request diffs provided by [flux-local](https://github.com/allenporter/flux-local)
-- Integrated [GitHub Actions](https://github.com/features/actions) with helpful workflows.
-
-## 💻 Machine Preparation
-
-### System requirements
-
-> [!NOTE]
-> 1. The included behaviour of Talos is that all nodes are able to run workloads, **including** the controller nodes. **Worker nodes** are therefore **optional**.
-> 2. Do you have 3 or more nodes? It is highly recommended to make 3 of them controller nodes for a highly available control plane.
-> 3. Running the cluster on Proxmox VE? My thoughts and recommendations about that are documented [here](https://onedr0p.github.io/home-ops/notes/proxmox-considerations.html).
-
-| Role    | Cores    | Memory        | System Disk               |
-|---------|----------|---------------|---------------------------|
-| Control | 4 _(6*)_ | 8GB _(24GB*)_ | 120GB _(500GB*)_ SSD/NVMe |
-| Worker  | 4 _(6*)_ | 8GB _(24GB*)_ | 120GB _(500GB*)_ SSD/NVMe |
-| _\* recommended_ |
-
-1. Head over to <https://factory.talos.dev> and follow the instructions which will eventually lead you to download a Talos Linux iso file (or for SBCs the `.raw.xz`). Make sure to note the schematic ID you will need this later on.
-
-2. Flash the iso or raw file to a USB drive and boot to Talos on your nodes with it.
-
-3. Continue on to 🚀 [**Getting Started**](#-getting-started)
+Each node has _some_ "extra" storage that is used by Longhorn.  It's nothing special, and honestly, probably the biggest hinderance to this being a "decent" cluster.  But...storage is expensive.
 
 ## 🚀 Getting Started
+
+(Leaving this all here for posterity, since I _know_ I'm going to have to start all over again at some point.)
+
+### Installing Talos
+
+You don't so much "install" Talos, as you just boot an ISO and when you run `task talos:bootstrap` (later), it will "just work".
+
+That's not ot say that you don't have to do SOME preparation, specifically, you need to make sure the nodes have their networking "right".  This might involve setting static DHCP reservations, or using a Talos ISO SPECIFIC to the node that you're working on, with the [appropriate kernel parameters set](https://www.talos.dev/v1.7/talos-guides/install/bare-metal-platforms/network-config/).
 
 Once you have installed Talos on your nodes, there are six stages to getting a Flux-managed cluster up and runnning.
 
@@ -73,6 +64,9 @@ You have two different options for setting up your local workstation.
 2. Continue on to 🔧 [**Stage 3**](#-stage-3-bootstrap-configuration)
 
 #### Non-devcontainer method
+
+> [!NOTE]
+> Honestly, don't even bother with this, because it's kinda hit or miss
 
 1. Install the most recent version of [task](https://taskfile.dev/), see the [installation docs](https://taskfile.dev/installation/) for other supported platforms.
 
@@ -148,7 +142,10 @@ You have two different options for setting up your local workstation.
     task configure
     ```
 
-4. Push you changes to git
+> [!NOTE]
+> At this point you may want to take long, hard look at the things that were actually written.  Specifically, you may want to [provision additional storage](https://kubito.dev/posts/talos-linux-additonal-disks-to-nodes/) at this time.
+
+4. Push your changes to git
 
    📍 _**Verify** all the `./kubernetes/**/*.sops.*` files are **encrypted** with SOPS_
 
@@ -178,9 +175,10 @@ You have two different options for setting up your local workstation.
 
     ```sh
     kubectl get nodes -o wide
-    # NAME           STATUS   ROLES                       AGE     VERSION
-    # k8s-0          Ready    control-plane,etcd,master   1h      v1.30.1
-    # k8s-1          Ready    worker                      1h      v1.30.1
+    NAME           STATUS   ROLES           AGE   VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE         KERNEL-VERSION   CONTAINER-RUNTIME
+    kubernetes-0   Ready    control-plane   11h   v1.30.3   10.100.50.100   <none>        Talos (v1.7.6)   6.6.43-talos     containerd://1.7.18
+    kubernetes-1   Ready    control-plane   11h   v1.30.3   10.100.50.101   <none>        Talos (v1.7.6)   6.6.43-talos     containerd://1.7.18
+    kubernetes-2   Ready    control-plane   11h   v1.30.3   10.100.50.102   <none>        Talos (v1.7.6)   6.6.43-talos     containerd://1.7.18
     ```
 
 3. Continue on to 🔹 [**Stage 6**](#-stage-6-install-flux-in-your-cluster)
