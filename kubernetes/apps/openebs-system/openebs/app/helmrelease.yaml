@@ -21,6 +21,8 @@ spec:
     remediation:
       retries: 3
   values:
+    mayastor:
+      enabled: true
     engines:
       local:
         lvm:
@@ -29,7 +31,7 @@ spec:
           enabled: false
       replicated:
         mayastor:
-          enabled: false
+          enabled: true
     openebs-crds:
       csi:
         volumeSnapshots:
