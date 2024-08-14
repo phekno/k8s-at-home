@@ -22,7 +22,7 @@ spec:
       retries: 3
   values:
     mayastor:
-      enabled: true
+      enabled: false
     engines:
       local:
         lvm:
@@ -31,7 +31,7 @@ spec:
           enabled: false
       replicated:
         mayastor:
-          enabled: true
+          enabled: false
     openebs-crds:
       csi:
         volumeSnapshots:
