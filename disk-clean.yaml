@@ -4,7 +4,7 @@ metadata:
   name: disk-clean
 spec:
   restartPolicy: Never
-  nodeName: kubernetes-2
+  nodeName: kubernetes-0
   volumes:
   - name: rook-data-dir
     hostPath:
