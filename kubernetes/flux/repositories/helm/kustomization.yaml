@@ -2,34 +2,34 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ./angelnu.yaml
-  - ./authentik.yaml
-  - ./backube.yaml
+  # - ./angelnu.yaml
+  # - ./authentik.yaml
+  # - ./backube.yaml
   - ./bitnami.yaml
   - ./bjw-s.yaml
   - ./cilium.yaml
-  - ./cloudnative-pg.yaml
+  # - ./cloudnative-pg.yaml
   # - ./coder.yaml
   - ./coredns.yaml
   # - ./csi-driver-nfs.yaml
-  - ./descheduler.yaml
-  - ./external-secrets.yaml
-  - ./gitea.yaml
-  - ./grafana.yaml
-  - ./hajimari.yaml
+  # - ./descheduler.yaml
+  # - ./external-secrets.yaml
+  # - ./gitea.yaml
+  # - ./grafana.yaml
+  # - ./hajimari.yaml
   - ./jetstack.yaml
-  - ./kubernetes-dashboard.yaml
-  - ./longhorn.yaml
+  # - ./kubernetes-dashboard.yaml
+  # - ./longhorn.yaml
   - ./metrics-server.yaml
-  - ./minecraft.yaml
+  # - ./minecraft.yaml
   - ./openebs.yaml
   - ./piraeus.yaml
   - ./postfinance.yaml
   - ./prometheus-community.yaml
-  - ./rook-ceph.yaml
+  # - ./rook-ceph.yaml
   - ./spegel.yaml
   - ./stakater.yaml
-  - ./weave-gitops.yaml
+  # - ./weave-gitops.yaml
   - ./external-dns.yaml
   - ./ingress-nginx.yaml
   - ./k8s-gateway.yaml
