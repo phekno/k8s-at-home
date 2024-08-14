@@ -4,7 +4,7 @@ metadata:
   name: disk-clean
 spec:
   restartPolicy: Never
-  nodeName: kubernetes-0
+  nodeName: kubernetes-2
   volumes:
   - name: rook-data-dir
     hostPath:
@@ -17,4 +17,5 @@ spec:
     volumeMounts:
     - name: rook-data-dir
       mountPath: /node/rook-data
-    command: ["/bin/sh", "-c", "rm -rf /node/rook-data/*"]
+    command: ["/bin/sh"]
+    args: ["-c", "echo BEFORE:;ls -alh /node/rook-data/;rm -rf /node/rook-data/*;echo AFTER:;ls -alh /node/rook-data/"]

@@ -5,7 +5,7 @@ metadata:
   name: disk-wipe
 spec:
   restartPolicy: Never
-  nodeName: kubernetes-0
+  nodeName: kubernetes-2
   containers:
   - name: disk-wipe
     image: busybox
