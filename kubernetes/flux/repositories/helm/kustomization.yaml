@@ -9,9 +9,9 @@ resources:
   - ./bjw-s.yaml
   - ./cilium.yaml
   - ./cloudnative-pg.yaml
-  - ./coder.yaml
+  # - ./coder.yaml
   - ./coredns.yaml
-  - ./csi-driver-nfs.yaml
+  # - ./csi-driver-nfs.yaml
   - ./descheduler.yaml
   - ./external-secrets.yaml
   - ./gitea.yaml
