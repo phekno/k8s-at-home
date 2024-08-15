@@ -16,8 +16,8 @@ spec:
         namespace: flux-system
   values:
     monitoring:
-      enabled: false
-      # createPrometheusRules: true
+      enabled: true
+      createPrometheusRules: true
     ingress:
       dashboard:
         ingressClassName: internal
