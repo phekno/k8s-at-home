@@ -16,13 +16,13 @@ spec:
         namespace: flux-system
   values:
     monitoring:
-      enabled: false
-      # createPrometheusRules: true
+      enabled: true
+      createPrometheusRules: true
     ingress:
       dashboard:
         ingressClassName: internal
-        # annotations:
-        #   external-dns.alpha.kubernetes.io/target: ingress-int.bjw-s.dev
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
         host:
           name: "rook.${SECRET_DOMAIN}"
           path: "/"
