@@ -104,7 +104,7 @@ spec:
       config:
         enabled: true
         type: persistentVolumeClaim
-        storageClass: openebs-hostpath
+        storageClass: ceph-block
         size: 10Gi
         accessMode: ReadWriteOnce
       tmp:
