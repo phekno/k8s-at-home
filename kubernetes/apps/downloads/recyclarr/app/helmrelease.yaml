@@ -59,7 +59,10 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: recyclarr
+        type: persistentVolumeClaim
+        storageClass: ceph-block
+        size: 10Gi
+        accessMode: ReadWriteOnce
       config-file:
         type: configMap
         name: recyclarr-configmap
