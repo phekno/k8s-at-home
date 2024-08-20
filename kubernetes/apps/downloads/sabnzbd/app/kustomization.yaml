@@ -7,4 +7,5 @@ resources:
   - ./helmrelease.yaml
   - ./gatus.yaml
   - ./externalsecret.yaml
+  - ./restore.yaml
   # - ./volsync.yaml
