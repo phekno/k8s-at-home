@@ -32,7 +32,7 @@ spec:
   restic:
     repository: radarr-restic-secret
     # Use an existing PVC, don't provision a new one
-    cacheStorageClassName: openebs-hostpath
+    cacheStorageClassName: ceph-block
     destinationPVC: radarr-config
     copyMethod: Direct
     moverSecurityContext:
