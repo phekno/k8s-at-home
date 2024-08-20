@@ -10,7 +10,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: &app shapshot-controller
-  path: ./kubernetes/apps/system/snapshot-controller/app
+  path: ./kubernetes/apps/kube-system/snapshot-controller/app
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
