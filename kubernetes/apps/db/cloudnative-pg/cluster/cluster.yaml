@@ -31,7 +31,7 @@ spec:
       destinationPath: s3://phekno-home-k8s-pg/
       # Note: serverName version needs to be incremented or changed
       # when recovering from an existing cnpg cluster
-      serverName: &currentCluster postgres-v5
+      serverName: &currentCluster postgres-v6
       s3Credentials:
         accessKeyId:
           name: cloudnative-pg-secret
@@ -43,7 +43,7 @@ spec:
   # cluster when recovering from an existing cnpg cluster
   bootstrap:
     recovery:
-      source: &previousCluster postgres-v4
+      source: &previousCluster postgres-v5
   externalClusters:
     - name: *previousCluster
       barmanObjectStore:
