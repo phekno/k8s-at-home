@@ -30,7 +30,7 @@ spec:
   trigger:
     manual: restore-once
   restic:
-    repository: radarr-restic-secret
+    repository: sonarr-restic-secret
     # Use an existing PVC, don't provision a new one
     cacheStorageClassName: ceph-block
     destinationPVC: sonarr-config
