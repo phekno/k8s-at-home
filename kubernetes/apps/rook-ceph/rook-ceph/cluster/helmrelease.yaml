@@ -75,11 +75,20 @@ spec:
           limits:
             memory: 256Mi
       storage:
-        useAllNodes: true
+        useAllNodes: false
         useAllDevices: false
         config:
           osdsPerDevice: "1"
-        deviceFilter: "sdc"
+        nodes:
+          - name: "kubernetes-0"
+            devices:
+              - name: "/dev/sdc"
+          - name: "kubernetes-1"
+            devices:
+              - name: "/dev/sdc"
+          - name: "kubernetes-2"
+            devices:
+              - name: "/dev/sdb"
     cephBlockPools:
       - name: ceph-blockpool
         spec:
