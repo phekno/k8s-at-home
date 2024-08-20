@@ -11,7 +11,7 @@ spec:
     image: alpine
     securityContext:
       privileged: true
-    command: ["/bin/sh", "-c", "dd if=/dev/zero bs=1M count=100 oflag=direct of=/dev/sdc"]
+    command: ["/bin/bash"]
     args: ["-c", "apk add sgdisk;sgdisk --zap-all /dev/sdc;dd if=/dev/zero of=/dev/sdc bs=1M count=100 oflag=direct,dsync;blkdiscard /dev/sdc;partprobe /dev/sdc"]
 ---
 apiVersion: v1
@@ -26,7 +26,7 @@ spec:
     image: alpine
     securityContext:
       privileged: true
-    command: ["/bin/sh", "-c", "dd if=/dev/zero bs=1M count=100 oflag=direct of=/dev/sdc"]
+    command: ["/bin/bash"]
     args: ["-c", "apk add sgdisk;sgdisk --zap-all /dev/sdc;dd if=/dev/zero of=/dev/sdc bs=1M count=100 oflag=direct,dsync;blkdiscard /dev/sdc;partprobe /dev/sdc"]
 ---
 ---
@@ -42,5 +42,5 @@ spec:
     image: alpine
     securityContext:
       privileged: true
-    command: ["/bin/sh", "-c", "dd if=/dev/zero bs=1M count=100 oflag=direct of=/dev/sdb"]
+    command: ["/bin/bash"]
     args: ["-c", "apk add sgdisk;sgdisk --zap-all /dev/sdb;dd if=/dev/zero of=/dev/sdb bs=1M count=100 oflag=direct,dsync;blkdiscard /dev/sdb;partprobe /dev/sdb"]
