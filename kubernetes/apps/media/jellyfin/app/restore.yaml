@@ -3,13 +3,13 @@
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: jellyfin-restic
+  name: jellyfin-restic-restore-secret
 spec:
   secretStoreRef:
     kind: ClusterSecretStore
     name: onepassword-connect
   target:
-    name: jellyfin-restic-secret
+    name: jellyfin-restic-restore-secret
     creationPolicy: Owner
     template:
       engineVersion: v2
@@ -25,15 +25,15 @@ spec:
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: jellyfin
+  name: jellyfin-restore
 spec:
   trigger:
     manual: restore-once
   restic:
-    repository: jellyfin-restic-secret
+    repository: jellyfin-restic-restore-secret
     # Use an existing PVC, don't provision a new one
     cacheStorageClassName: ceph-block
-    destinationPVC: jellyfin-config
+    destinationPVC: config-jellyfin-0
     copyMethod: Direct
     moverSecurityContext:
       runAsUser: 1000
