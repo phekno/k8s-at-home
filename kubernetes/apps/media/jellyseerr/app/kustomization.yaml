@@ -5,7 +5,7 @@ kind: Kustomization
 namespace: media
 resources:
   - ./helmrelease.yaml
-  # - ./restore.yaml
+  - ./restore.yaml
   # - ./pvc.yaml
   # - ./nfs-pvc.yaml
   # - ./volsync.yaml

@@ -33,7 +33,7 @@ spec:
     repository: jellyseerr-restic-restore-secret
     # Use an existing PVC, don't provision a new one
     cacheStorageClassName: ceph-block
-    destinationPVC: config-jellyseerr-0
+    destinationPVC: jellyseerr-config
     copyMethod: Direct
     moverSecurityContext:
       runAsUser: 1000
