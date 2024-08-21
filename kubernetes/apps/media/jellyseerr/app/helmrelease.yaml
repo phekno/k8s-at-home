@@ -90,6 +90,9 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: jellyseerr
+        type: persistentVolumeClaim
+        storageClass: ceph-block
+        size: 10Gi
+        accessMode: ReadWriteOnce
         globalMounts:
           - path: /app/config
