@@ -3,7 +3,7 @@
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: sonarr-restic
+  name: sonarr-restic-secret
 spec:
   secretStoreRef:
     kind: ClusterSecretStore
