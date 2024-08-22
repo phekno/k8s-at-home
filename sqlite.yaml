@@ -1,0 +1,30 @@
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: jellyfin
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   storageClassName: ceph-block
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sqlite
+  namespace: media
+spec:
+  restartPolicy: Never
+  volumes:
+  - name: jellyfin
+    persistentVolumeClaim:
+      claimName: jellyfin
+    globalMounts:
+      - path: /config
+  containers:
+  - name: sqlite
+    image: alpine
+    securityContext:
+      privileged: true
+    command: ["/bin/sh -c"]
+    args: ["-c", "echo BEFORE:;ls -alh /node/rook-data/;rm -rf /node/rook-data/*;echo AFTER:;ls -alh /node/rook-data/"]
