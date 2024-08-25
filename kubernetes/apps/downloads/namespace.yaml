@@ -5,5 +5,5 @@ metadata:
   name: downloads
   labels:
     kustomize.toolkit.fluxcd.io/prune: disabled
-    downloads-routed-gateway: "true"
+    # downloads-routed-gateway: "true"
     volsync.backube/privileged-movers: "true"
