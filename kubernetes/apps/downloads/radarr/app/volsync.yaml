@@ -3,13 +3,13 @@
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: radarr-restic-secret
+  name: radarr-restic-backup-secret
 spec:
   secretStoreRef:
     kind: ClusterSecretStore
     name: onepassword-connect
   target:
-    name: radarr-restic-secret
+    name: radarr-restic-backup-secret
     creationPolicy: Owner
     template:
       engineVersion: v2
@@ -34,7 +34,7 @@ spec:
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 10
-    repository: radarr-restic-secret
+    repository: radarr-restic-backup-secret
     cacheCapacity: 2Gi
     volumeSnapshotClassName: csi-ceph-blockpool
     moverSecurityContext:
