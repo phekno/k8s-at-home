@@ -1,9 +1,8 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/external-secrets.io/externalsecret_v1beta1.json
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: jellyseerr-restic
+  name: jellyseerr-restic-secret
 spec:
   secretStoreRef:
     kind: ClusterSecretStore
@@ -22,13 +21,12 @@ spec:
     - extract:
         key: volsync
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/volsync.backube/replicationsource_v1alpha1.json
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
   name: jellyseerr
 spec:
-  sourcePVC: jellyseerr
+  sourcePVC: jellyseerr-config
   trigger:
     schedule: "0 1 * * *"
   restic:
@@ -36,7 +34,7 @@ spec:
     pruneIntervalDays: 10
     repository: jellyseerr-restic-secret
     cacheCapacity: 2Gi
-    volumeSnapshotClassName: longhorn-snapclass
+    volumeSnapshotClassName: csi-ceph-blockpool
     moverSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000

@@ -34,7 +34,7 @@ spec:
     pruneIntervalDays: 10
     repository: wizarr-restic-secret
     cacheCapacity: 2Gi
-    volumeSnapshotClassName: longhorn-snapclass
+    volumeSnapshotClassName: csi-ceph-blockpool
     moverSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000
