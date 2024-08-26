@@ -54,7 +54,6 @@ spec:
         ports:
           http:
             port: 5690
-
     ingress:
       main:
         enabled: true
