@@ -18,14 +18,15 @@ The stack includes:
 - [external-dns](https://github.com/kubernetes-sigs/external-dns) - External DNS for exposed services
 - [cloudflared](https://github.com/cloudflare/cloudflared) - Manages [Cloudflare](https://www.cloudflare.com/) [Tunnel](https://www.cloudflare.com/products/tunnel/)
 - [Renovate](https://www.mend.io/renovate) - Generates PRs for updatates
-- [Longhorn](https://longhorn.io/) - Distributed storage (not awesome, but it does the trick, given my crusty, old hardware)
+- ~~[Longhorn](https://longhorn.io/) - Distributed storage (not awesome, but it does the trick, given my crusty, old hardware)~~
+- [Rook-Ceph](https://rook.io/) - Distributed storage (seemingly working better now that I don't have failing disks?)
 - [OpenEBS](https://openebs.io/) - This is/was configured by default from the cluster-template. I chose to replace it with Longhorn (for better or worse)
 
 ## 💻 Hardware
 
 The hardware this runs on is a mix of 12th and 13th gen crusty, old 2U pizza-boxes from Dell and IBM.  There's also another crusty, old 2U Dell that serves as a NAS for all this.
 
-Each node has _some_ "extra" storage that is used by Longhorn.  It's nothing special, and honestly, probably the biggest hinderance to this being a "decent" cluster.  But...storage is expensive.
+Each node has _some_ "extra" storage that is used by Rook.  It's nothing special, and honestly, probably the biggest hinderance to this being a "decent" cluster.  But...storage is expensive.
 
 ## 🚀 Getting Started
 
@@ -245,25 +246,21 @@ The `external-dns` application created in the `networking` namespace will handle
 
 `k8s_gateway` will provide DNS resolution to external Kubernetes resources (i.e. points of entry to the cluster) from any device that uses your home DNS server. For this to work, your home DNS server must be configured to forward DNS queries for `${bootstrap_cloudflare.domain}` to `${bootstrap_cloudflare.gateway_vip}` instead of the upstream DNS server(s) it normally uses. This is a form of **split DNS** (aka split-horizon DNS / conditional forwarding).
 
-> [!TIP]
-> Below is how to configure a Pi-hole for split DNS. Other platforms should be similar.
-> 1. Apply this file on the Pihole server while substituting the variables
-> ```sh
-> # /etc/dnsmasq.d/99-k8s-gateway-forward.conf
-> server=/${bootstrap_cloudflare.domain}/${bootstrap_cloudflare.gateway_vip}
-> ```
-> 2. Restart dnsmasq on the server.
-> 3. Query an internal-only subdomain from your workstation (any `internal` class ingresses): `dig @${home-dns-server-ip} echo-server-internal.${bootstrap_cloudflare.domain}`. It should resolve to `${bootstrap_cloudflare.ingress_vip}`.
+I'm running AdGuard Home for my "main" network's DNS server.  In order to get DNS working appropriately using split DNS, you have to set up a conditional forwarder to the gateway VIP, it will look something like this:
 
-If you're having trouble with DNS be sure to check out these two GitHub discussions: [Internal DNS](https://github.com/onedr0p/cluster-template/discussions/719) and [Pod DNS resolution broken](https://github.com/onedr0p/cluster-template/discussions/635).
+```
+[/example.com/]192.168.1.150
+```
 
-... Nothing working? That is expected, this is DNS after all!
+This is assuming the domain name you're using is example.com, and your gateway VIP is at 192.168.1.150.  If that's the case you'd add that line to your "Upstream DNS servers" in your AdGuard Home DNS settings.  This has worked just fine for me.
 
-#### 📜 Certificates
+DNS is almost always the problem...and it took me a long time to get it sorted.
+
+<!-- #### 📜 Certificates
 
 By default this template will deploy a wildcard certificate using the Let's Encrypt **staging environment**, which prevents you from getting rate-limited by the Let's Encrypt production servers if your cluster doesn't deploy properly (for example due to a misconfiguration). Once you are sure you will keep the cluster up for more than a few hours be sure to switch to the production servers as outlined in `config.yaml`.
 
-📍 _You will need a production certificate to reach internet-exposed applications through `cloudflared`._
+📍 _You will need a production certificate to reach internet-exposed applications through `cloudflared`._ -->
 
 #### 🪝 Github Webhook
 
@@ -375,18 +372,18 @@ task talos:upgrade-k8s controller=? to=?
 - Make a post in this repository's Github [Discussions](https://github.com/onedr0p/cluster-template/discussions).
 - Start a thread in the `#support` or `#cluster-template` channels in the [Home Operations](https://discord.gg/home-operations) Discord server.
 
-## ❔ What's next
+<!-- ## ❔ What's next
 
-The cluster is your oyster (or something like that). Below are some optional considerations you might want to review.
+The cluster is your oyster (or something like that). Below are some optional considerations you might want to review. -->
 
 ### Ship it
 
 To browse or get ideas on applications people are running, community member [@whazor](https://github.com/whazor) created [Kubesearch](https://kubesearch.dev) as a creative way to search Flux HelmReleases across Github and Gitlab.
 
-### Storage
+<!-- ### Storage
 
 The included CSI (openebs in local-hostpath mode) is a great start for storage but soon you might find you need more features like replicated block storage, or to connect to a NFS/SMB/iSCSI server. If you need any of those features be sure to check out the projects like [rook-ceph](https://github.com/rook/rook), [longhorn](https://github.com/longhorn/longhorn), [openebs](https://github.com/openebs/openebs), [democratic-csi](https://github.com/democratic-csi/democratic-csi), [csi-driver-nfs](https://github.com/kubernetes-csi/csi-driver-nfs),
-and [synology-csi](https://github.com/SynologyOpenSource/synology-csi).
+and [synology-csi](https://github.com/SynologyOpenSource/synology-csi). -->
 
 ## 🙌 Related Projects
 
@@ -397,6 +394,7 @@ If this repo is too hot to handle or too cold to hold check out these following 
 - [ricsanfre/pi-cluster](https://github.com/ricsanfre/pi-cluster) - _Pi Kubernetes Cluster. Homelab kubernetes cluster automated with Ansible and ArgoCD_
 - [techno-tim/k3s-ansible](https://github.com/techno-tim/k3s-ansible) - _The easiest way to bootstrap a self-hosted High Availability Kubernetes cluster. A fully automated HA k3s etcd install with kube-vip, MetalLB, and more_
 
+<!--
 ## ⭐ Stargazers
 
 <div align="center">
@@ -407,4 +405,4 @@ If this repo is too hot to handle or too cold to hold check out these following 
 
 ## 🤝 Thanks
 
-Big shout out to all the contributors, sponsors and everyone else who has helped on this project.
+Big shout out to all the contributors, sponsors and everyone else who has helped on this project. -->
