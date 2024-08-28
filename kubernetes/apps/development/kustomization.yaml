@@ -4,6 +4,4 @@ kind: Kustomization
 resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
-  # Flux-Kustomizations
-  # - ./coder/ks.yaml
   # - ./gitea/ks.yaml
