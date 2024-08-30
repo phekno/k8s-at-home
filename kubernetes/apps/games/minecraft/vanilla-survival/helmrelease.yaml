@@ -73,7 +73,7 @@ spec:
       dataDir:
         enabled: true
         size: 20Gi
-        existingClaim: *app
+        # existingClaim: *app
     serviceAnnotations:
       mc-router.itzg.me/externalServerName: &host vanilla-survival.${SECRET_DOMAIN}
     minecraftServer:
