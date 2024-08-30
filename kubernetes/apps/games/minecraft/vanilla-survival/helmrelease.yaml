@@ -75,7 +75,7 @@ spec:
         size: 20Gi
         existingClaim: *app
     serviceAnnotations:
-      mc-router.itzg.me/externalServerName: vanilla-survival.${SECRET_DOMAIN}
+      mc-router.itzg.me/externalServerName: &host vanilla-survival.${SECRET_DOMAIN}
     minecraftServer:
       eula: true
       version: 1.20.1
