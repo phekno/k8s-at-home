@@ -12,7 +12,7 @@ spec:
       version: 4.22.0
       sourceRef:
         kind: HelmRepository
-        name: minecraft
+        name: itzg-charts
         namespace: flux-system
   install:
     remediation:
@@ -23,10 +23,10 @@ spec:
       strategy: rollback
       retries: 3
   dependsOn:
-  - name: longhorn
+  - name: rook-ceph-cluster
+    namespace: rook-ceph
+  - name: volsync
     namespace: storage
-  # - name: volsync
-  #   namespace: storage
   values:
     deploymentAnnotations:
       secret.reloader.stakater.com/reload: vanilla-survival-secret
@@ -69,11 +69,13 @@ spec:
       TZ: ${TIMEZONE}
       ENABLE_AUTOPAUSE: TRUE # Doesn't work in Kubes
     persistence:
+      storageClass: ceph-block
       dataDir:
         enabled: true
+        size: 20Gi
         existingClaim: *app
     serviceAnnotations:
-      mc-router.itzg.me/externalServerName: vanilla-survival.${SECONDARY_DOMAIN}
+      mc-router.itzg.me/externalServerName: vanilla-survival.${SECRET_DOMAIN}
     minecraftServer:
       eula: true
       version: 1.20.1
@@ -89,7 +91,7 @@ spec:
       whitelist: "phekno"
       ops: "phekno"
       motd: "Vanilla Survival"
-      worldSaveName: create
+      worldSaveName: vanilla-survival
       viewDistance: 12
       modUrls:
       # - "https://edge.forgecdn.net/files/4835/191/create-1.20.1-0.5.1.f.jar?api-key=267C6CA3"
@@ -108,7 +110,13 @@ spec:
           type: ClusterIP
           port: 9225
         ingress:
-          enabled: false
+          enabled: true
+          ingressClassName: external
+          annotations:
+            external-dns.alpha.kubernetes.io/target: "mc.${SECRET_DOMAIN}"
+            external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+          hosts:
+           - name: *host
   valuesFrom:
   - kind: Secret
     name: vanilla-survival-secret

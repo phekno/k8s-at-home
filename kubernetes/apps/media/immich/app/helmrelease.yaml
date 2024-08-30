@@ -1,0 +1,150 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app immich
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      server:
+        strategy: RollingUpdate
+        annotations:
+          secret.reloader.stakater.com/reload: immich-secret
+          configmap.reloader.stakater.com/reload: immich-configmap
+        pod:
+          enableServiceLinks: false
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 16.3@sha256:8ba3204f6b293dd168766009aae2ce4fa986a29b931c2d30ac1b30238ac750b8
+              pullPolicy: IfNotPresent
+            envFrom:
+              - secretRef:
+                  name: immich-secret
+        containers:
+          main:
+            image:
+              repository: ghcr.io/immich-app/immich-server
+              tag: v1.112.1@sha256:c4e817f0eadbd9a6c2699cc884d5e7070428daec813c17db77d31fcca5b78ca6
+            envFrom:
+              - secretRef:
+                  name: immich-secret
+              - configMapRef:
+                  name: immich-configmap
+      machine-learning:
+        strategy: RollingUpdate
+        annotations:
+          secret.reloader.stakater.com/reload: immich-secret
+          configmap.reloader.stakater.com/reload: immich-configmap
+        pod:
+          enableServiceLinks: false
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+        containers:
+          main:
+            image:
+              repository: ghcr.io/immich-app/immich-machine-learning
+              tag: v1.112.1@sha256:9600eff5a66ae426293f00b171711bc1647c85cf966d759ee08ab2d05e0580b5
+            envFrom:
+              - secretRef:
+                  name: immich-secret
+              - configMapRef:
+                  name: immich-configmap
+      redis:
+        containers:
+          main:
+            image:
+              repository: public.ecr.aws/docker/library/redis
+              tag: 7.4.0@sha256:878983f8f5045b28384fc300268cec62bca3b14d5e1a448bec21f28cfcc7bf78
+            env:
+              REDIS_REPLICATION_MODE: master
+            command: ["redis-server"]
+    service:
+      server:
+        controller: server
+        ports:
+          http:
+            port: 3001
+      machine-learning:
+        controller: machine-learning
+        ports:
+          http:
+            port: 3003
+      redis:
+        controller: redis
+        ports:
+          http:
+            port: 6379
+    ingress:
+      main:
+        enabled: true
+        className: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN_NAME}"
+        hosts:
+          - host: &host "photos.${SECRET_DOMAIN_NAME}"
+            paths:
+              - path: /
+                service:
+                  identifier: server
+                  port: http
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      library:
+        existingClaim: immich-nfs
+        advancedMounts:
+          server:
+            main:
+              - path: /usr/src/app/upload
+      geocoding-dump:
+        type: emptyDir
+        advancedMounts:
+          server:
+            main:
+              - path: /usr/src/app/.reverse-geocoding-dump
+      transformers-cache:
+        type: emptyDir
+        advancedMounts:
+          server:
+            main:
+              - path: /usr/src/app/.transformers_cache
+      model-cache:
+        type: emptyDir
+        advancedMounts:
+          machine-learning:
+            main:
+              - path: /cache
