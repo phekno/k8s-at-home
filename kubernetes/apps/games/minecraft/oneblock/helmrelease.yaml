@@ -79,11 +79,12 @@ spec:
       mc-router.itzg.me/externalServerName: &host oneblock.${SECRET_DOMAIN}
     minecraftServer:
       eula: true
-      version: 1.20.1
+      version: 1.21.1
       memory: 8192M
       difficulty: easy
       pvp: false
       onlineMode: true
+      downloadWorldUrl: https://www.curseforge.com/api/v1/mods/307740/files/5493721/download
       whitelist: "phekno,quinnyf13,harpyf13"
       ops: "phekno,quinnyf13,harpyf13"
       viewDistance: 12
