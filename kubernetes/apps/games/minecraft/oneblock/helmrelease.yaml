@@ -38,7 +38,7 @@ spec:
     #   secret.reloader.stakater.com/reload: &secret oneblock-secret
     image:
       repository: ghcr.io/phekno/phekno-mc-oneblock
-      tag: latest
+      tag: latest@sha256:f4b12c07dd6b51cb31c792419e8a05c127ac1ccb06ab01069fcb507aad3631d0
     resources:
       requests:
         cpu: 2000m
