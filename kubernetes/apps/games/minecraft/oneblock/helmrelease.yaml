@@ -108,6 +108,6 @@ spec:
            - name: *host
   valuesFrom:
     - kind: Secret
-      name: *secret
+      name: oneblock-secret
       valuesKey: rcon_password
       targetPath: minecraftServer.rcon.password
