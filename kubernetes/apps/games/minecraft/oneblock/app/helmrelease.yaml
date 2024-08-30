@@ -13,28 +13,31 @@ spec:
       version: 4.22.0
       sourceRef:
         kind: HelmRepository
-        name: minecraft
+        name: itzg-charts
         namespace: flux-system
   maxHistory: 2
   install:
-    createNamespace: true
     remediation:
       retries: 3
   upgrade:
     cleanupOnFail: true
     remediation:
+      strategy: rollback
       retries: 3
-  uninstall:
-    keepHistory: false
+  dependsOn:
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
+    - name: volsync
+      namespace: storage
   values:
-    podSecurityContext:
+    securityContext:
       runAsUser: 1000
       runAsGroup: 1000
       fsGroup: 1000
-    deploymentAnnotations:
-      secret.reloader.stakater.com/reload: &secret oneblock-secret
+    # deploymentAnnotations:
+    #   secret.reloader.stakater.com/reload: &secret oneblock-secret
     image:
-      repository: phekno/oneblock-minecraft
+      repository: ghcr.io/phekno/phekno-mc-oneblock
       tag: latest
     resources:
       requests:
@@ -43,21 +46,40 @@ spec:
         memory: 8Gi
     livenessProbe:
       enabled: false
+      command:
+        - echo
+      initialDelaySeconds: 30
+      periodSeconds: 5
+      failureThreshold: 20
+      successThreshold: 1
+      timeoutSeconds: 1
     readinessProbe:
       enabled: false
+      command:
+        - echo
+      initialDelaySeconds: 30
+      periodSeconds: 5
+      failureThreshold: 20
+      successThreshold: 1
+      timeoutSeconds: 1
     startupProbe:
+      command:
+        - echo
       enabled: false
+      failureThreshold: 30
+      periodSeconds: 10
     extraEnv:
       TZ: "${TIMEZONE}"
     persistence:
+      storageClass: ceph-block
       dataDir:
-        existingClaim: oneblock
         enabled: true
+        size: 20Gi
     serviceAnnotations:
-      lbipam.cilium.io/ips: "10.100.50.206"
+      mc-router.itzg.me/externalServerName: &host oneblock.${SECRET_DOMAIN}
     minecraftServer:
       eula: true
-      version: "1.20.1"
+      version: 1.20.1
       memory: 8192M
       difficulty: easy
       pvp: false
@@ -67,33 +89,25 @@ spec:
       viewDistance: 12
       rcon:
         enabled: true
-        serviceType: ClusterIP
-      serviceType: LoadBalancer
-        # fileId: "4757258"
-      # extraPorts:
-      #   - name: map
-      #     containerPort: 8123
-      #     protocol: TCP
-      #     service:
-      #       enabled: true
-      #       embedded: false
-      #       port: 8123
-      #     ingress:
-      #       ingressClassName: external
-      #       enabled: true
-      #       hosts:
-      #         - name: &host "mc-vanilla.${SECRET_DOMAIN}"
-      #           path: /
-      #           pathType: Prefix
-      #       tls:
-      #         - hosts:
-      #             - *host
-  valuesFrom:
-    - kind: Secret
-      name: *secret
-      valuesKey: rcon_password
-      targetPath: minecraftServer.rcon.password
-    # - kind: Secret
-    #   name: *secret
-    #   valuesKey: cf_api_key
-    #   targetPath: minecraftServer.autoCurseForge.apiKey.key
+      extraPorts:
+      - name: metrics
+        containerPort: 9225
+        protocol: TCP
+        service:
+          enabled: true
+          embedded: false
+          type: ClusterIP
+          port: 9225
+        ingress:
+          enabled: true
+          ingressClassName: external
+          annotations:
+            external-dns.alpha.kubernetes.io/target: "mc.${SECRET_DOMAIN}"
+            external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+          hosts:
+           - name: *host
+  # valuesFrom:
+  #   - kind: Secret
+  #     name: *secret
+  #     valuesKey: rcon_password
+  #     targetPath: minecraftServer.rcon.password
