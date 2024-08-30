@@ -2,18 +2,18 @@
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: oneblock-restic
+  name: vanilla-survival-restic
 spec:
   secretStoreRef:
     kind: ClusterSecretStore
     name: onepassword-connect
   target:
-    name: oneblock-restic-secret
+    name: vanilla-survival-restic-secret
     creationPolicy: Owner
     template:
       engineVersion: v2
       data:
-        RESTIC_REPOSITORY: '{{ .BUCKET_NAME }}/oneblock'
+        RESTIC_REPOSITORY: '{{ .BUCKET_NAME }}/vanilla-survival'
         RESTIC_PASSWORD: '{{ .RESTIC_PASSWORD }}'
         AWS_ACCESS_KEY_ID: '{{ .AWS_ACCESS_KEY_ID }}'
         AWS_SECRET_ACCESS_KEY: '{{ .AWS_SECRET_ACCESS_KEY }}'
@@ -24,15 +24,15 @@ spec:
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: oneblock
+  name: vanilla-survival
 spec:
-  sourcePVC: oneblock-minecraft-datadir
+  sourcePVC: vanilla-survival-minecraft-datadir
   trigger:
     schedule: "0 1 * * *"
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 10
-    repository: oneblock-restic-secret
+    repository: vanilla-survival-restic-secret
     cacheCapacity: 2Gi
     volumeSnapshotClassName: csi-ceph-blockpool
     moverSecurityContext:
