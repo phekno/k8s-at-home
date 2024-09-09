@@ -103,7 +103,10 @@ spec:
         globalMounts:
           - path: /config
       library:
-        existingClaim: immich
+        enabled: true
+        type: nfs
+        server: 10.100.50.5
+        path: /tank/pictures
         globalMounts:
           - path: /usr/src/app/upload
       geocoding-dump:
