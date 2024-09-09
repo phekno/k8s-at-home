@@ -9,7 +9,8 @@ data:
   IMMICH_MACHINE_LEARNING_URL: http://immich-machine-learning.media.svc.cluster.local:3003
   IMMICH_SERVER_URL: http://immich-server.media.svc.cluster.local:3001
   LOG_LEVEL: verbose
-  REDIS_HOSTNAME: immich-redis.media.svc.cluster.local
+  REDIS_URL: ioredis://ewogICJzZW50aW5lbHMiOiBbCiAgICB7CiAgICAgICJob3N0IjogInJlZGlzLW5vZGUtMC5yZWRpcy1oZWFkbGVzcy5kYi5zdmMuY2x1c3Rlci5sb2NhbCIsCiAgICAgICJwb3J0IjogMjYzNzkKICAgIH0sCiAgICB7CiAgICAgICJob3N0IjogInJlZGlzLW5vZGUtMS5yZWRpcy1oZWFkbGVzcy5kYi5zdmMuY2x1c3Rlci5sb2NhbCIsCiAgICAgICJwb3J0IjogMjYzNzkKICAgIH0sCiAgICB7CiAgICAgICJob3N0IjogInJlZGlzLW5vZGUtMi5yZWRpcy1oZWFkbGVzcy5kYi5zdmMuY2x1c3Rlci5sb2NhbCIsCiAgICAgICJwb3J0IjogMjYzNzkKICAgIH0KICBdLAogICJuYW1lIjogInJlZGlzLW1hc3RlciIKfQo=
+  REDIS_DBINDEX: 14
   TRANSFORMERS_CACHE: /usr/src/app/.transformers_cache
   TYPESENSE_DATA_DIR: /config
   TYPESENSE_HOST: immich-typesense.media.svc.cluster.local
