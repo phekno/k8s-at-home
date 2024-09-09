@@ -8,5 +8,5 @@ resources:
   - ./configmap.yaml
   # - ./gatus.yaml
   - ./server
-  - ./microservices
+  # - ./microservices
   - ./machine-learning
