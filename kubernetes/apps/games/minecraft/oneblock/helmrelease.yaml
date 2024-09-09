@@ -84,7 +84,7 @@ spec:
       difficulty: easy
       pvp: false
       onlineMode: true
-      downloadWorldUrl: https://www.curseforge.com/api/v1/mods/307740/files/5493721/download
+      # downloadWorldUrl: https://www.curseforge.com/api/v1/mods/307740/files/5493721/download
       whitelist: "phekno,quinnyf13,harpyf13"
       ops: "phekno,quinnyf13,harpyf13"
       viewDistance: 12
