@@ -7,7 +7,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: cloudnative-pg-postgres-vectors
+    - name: cloudnative-pg-cluster-vectors
     - name: external-secrets-stores
   path: ./kubernetes/apps/media/immich/app
   prune: true
