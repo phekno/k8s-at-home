@@ -3,7 +3,7 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: postgres
+  name: postgres-vectors
 spec:
   instances: 1
   imageName:  ghcr.io/cloudnative-pg/postgresql:16.3-10
@@ -18,17 +18,19 @@ spec:
     parameters:
       max_connections: "600"
       shared_buffers: 512MB
+    shared_preload_libraries:
+      - "vectors.so"
   monitoring:
     enablePodMonitor: true
   backup:
-    retentionPolicy: 15d
+    retentionPolicy: 14d
     barmanObjectStore: &barmanObjectStore
       data:
         compression: bzip2
       wal:
         compression: bzip2
         maxParallel: 8
-      destinationPath: s3://phekno-home-k8s-pg/pg-vectors
+      destinationPath: s3://phekno-home-k8s-pg/pg-vectors/
       # Note: serverName version needs to be incremented or changed
       # when recovering from an existing cnpg cluster
       serverName: &currentCluster postgres-vectors-v1
