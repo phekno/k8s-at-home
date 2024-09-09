@@ -29,7 +29,6 @@ spec:
     keepHistory: false
   dependsOn:
     - name: immich-server
-    - name: immich-redis
   values:
     defaultPodOptions:
       enableServiceLinks: false
