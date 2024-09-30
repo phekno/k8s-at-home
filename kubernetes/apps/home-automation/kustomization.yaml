@@ -7,3 +7,4 @@ resources:
   # - ./home-assistant/ks.yaml
   # - ./home-assistant-code/ks.yaml
   # - ./mosquitto/ks.yaml
+  - ./netboot/ks.yaml
