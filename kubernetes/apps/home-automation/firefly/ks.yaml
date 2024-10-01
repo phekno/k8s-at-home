@@ -5,6 +5,7 @@ metadata:
   name: firefly
   namespace: flux-system
 spec:
+  interval: 15m
   targetNamespace: home-automation
   dependsOn:
     - name: external-secrets-stores
