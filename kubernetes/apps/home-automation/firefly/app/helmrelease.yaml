@@ -3,7 +3,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: firefly
+  name: &app firefly
+  namespace: home-automation
 spec:
   interval: 30m
   chart:
