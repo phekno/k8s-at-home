@@ -55,11 +55,11 @@ spec:
               readiness:
                 enabled: true
             env:
-              TZ: "${TIMEZONE}"
-              APP_URL: "https://money.${SECRET_DOMAIN}"
+              # TZ: "${TIMEZONE}"
+              # APP_URL: "https://money.${SECRET_DOMAIN}"
               APP_ENV: production
               TRUSTED_PROXIES: "**"
-              COOKIE_DOMAIN: "${SECRET_DOMAIN}"
+              # COOKIE_DOMAIN: "${SECRET_DOMAIN}"
               COOKIE_SECURE: true
               COOKIE_SAMESITE: lax
             envFrom: *envFrom
