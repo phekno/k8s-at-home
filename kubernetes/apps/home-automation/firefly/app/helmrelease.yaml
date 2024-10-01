@@ -47,21 +47,21 @@ spec:
                 memory: 500Mi
               limits:
                 memory: 2000Mi
-            probes:
-              startup:
-                enabled: false
-              liveness:
-                enabled: true
-              readiness:
-                enabled: true
+            # probes:
+            #   startup:
+            #     enabled: false
+            #   liveness:
+            #     enabled: true
+            #   readiness:
+            #     enabled: true
             env:
               TZ: "${TIMEZONE}"
-              APP_URL: "https://money.${SECRET_DOMAIN}"
+              APP_URL: "https://money.phekno.io"
               APP_ENV: "production"
               TRUSTED_PROXIES: "**"
-              COOKIE_DOMAIN: "${SECRET_DOMAIN}"
-              COOKIE_SECURE: "true"
-              COOKIE_SAMESITE: "lax"
+              # COOKIE_DOMAIN: "phekno.io"
+              # COOKIE_SECURE: "true"
+              # COOKIE_SAMESITE: "lax"
             envFrom: *envFrom
     service:
       app:
@@ -74,7 +74,7 @@ spec:
         enabled: true
         className: internal
         hosts:
-          - host: &host "money.${SECRET_DOMAIN}"
+          - host: &host "money.phekno.io"
             paths:
               - path: /
                 service:
@@ -90,7 +90,7 @@ spec:
         storageClass: ceph-block
         size: 20Gi
         accessMode: ReadWriteOnce
-        advancedMounts:
-          firefly:
-            app:
-              - path: /var/www/html/storage/upload
+        # advancedMounts:
+        #   firefly:
+        #     app:
+        #       - path: /var/www/html/storage/upload
