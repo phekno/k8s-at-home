@@ -28,6 +28,14 @@ spec:
   values:
     controllers:
       firefly:
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 16
+            envFrom: &envFrom
+              - secretRef:
+                  name: firefly-secret
         containers:
           app:
             image:
@@ -46,9 +54,6 @@ spec:
                 enabled: true
               readiness:
                 enabled: true
-            envFrom: &envFrom
-              - secretRef:
-                  name: firefly-secret
             env:
               TZ: America/Chicago
               APP_URL: "https://money.${SECRET_DOMAIN}"
@@ -60,6 +65,7 @@ spec:
               # AUTHENTICATION_GUARD: remote_user_guard
               # AUTHENTICATION_GUARD_HEADER:
               # AUTHENTICATION_GUARD_EMAIL:
+            envFrom: *envFrom
           # cronjob:
           #   image:
           #     repository: alpine
@@ -79,12 +85,6 @@ spec:
           #         secretKeyRef:
           #           name: firefly-secret
           #           key: STATIC_CRON_TOKEN
-        initContainers:
-          init-db:
-            image:
-              repository: ghcr.io/onedr0p/postgres-init
-              tag: 16
-            envFrom: *envFrom
         # initContainers:
         #   init-db:
         #     image:
