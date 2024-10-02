@@ -60,9 +60,9 @@ spec:
               APP_URL: "https://money.phekno.io"
               APP_ENV: "production"
               TRUSTED_PROXIES: "**"
-              # COOKIE_DOMAIN: "phekno.io"
-              # COOKIE_SECURE: "true"
-              # COOKIE_SAMESITE: "lax"
+              COOKIE_DOMAIN: "phekno.io"
+              COOKIE_SECURE: "true"
+              COOKIE_SAMESITE: "lax"
             envFrom:
               - secretRef:
                   name: firefly-secret
