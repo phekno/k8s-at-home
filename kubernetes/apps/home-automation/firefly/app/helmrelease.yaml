@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app firefly
+  name: firefly
   namespace: home-automation
 spec:
   interval: 30m
@@ -55,17 +55,17 @@ spec:
             #     enabled: true
             #   readiness:
             #     enabled: true
-            env:
-              TZ: "${TIMEZONE}"
-              APP_URL: "https://money.phekno.io"
-              APP_ENV: "production"
-              TRUSTED_PROXIES: "**"
-              # COOKIE_DOMAIN: "phekno.io"
-              # COOKIE_SECURE: "true"
-              # COOKIE_SAMESITE: "lax"
-            envFrom:
-              - secretRef:
-                  name: firefly-secret
+            # env:
+            #   TZ: "${TIMEZONE}"
+            #   APP_URL: "https://money.phekno.io"
+            #   APP_ENV: "production"
+            #   TRUSTED_PROXIES: "**"
+            #   # COOKIE_DOMAIN: "phekno.io"
+            #   # COOKIE_SECURE: "true"
+            #   # COOKIE_SAMESITE: "lax"
+            # envFrom:
+            #   - secretRef:
+            #       name: firefly-secret
     service:
       app:
         controller: firefly
@@ -77,7 +77,7 @@ spec:
         enabled: true
         className: internal
         hosts:
-          - host: &host "money.phekno.io"
+          - host: "money.phekno.io"
             paths:
               - path: /
                 service:
@@ -85,7 +85,7 @@ spec:
                   port: http
         tls:
           - hosts:
-              - *host
+              - "money.phekno.io"
     persistence:
       data:
         enabled: true
