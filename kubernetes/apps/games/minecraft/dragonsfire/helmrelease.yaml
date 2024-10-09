@@ -68,6 +68,9 @@ spec:
     extraEnv:
       TZ: ${TIMEZONE}
       ENABLE_AUTOPAUSE: TRUE # Doesn't work in Kubes
+    envFrom:
+      - secretRef:
+          name: dragonsfire-secret
     persistence:
       storageClass: ceph-block
       dataDir:
@@ -78,7 +81,7 @@ spec:
     minecraftServer:
       eula: true
       version: 1.20.1
-      type: FORGE
+      type: AUTO_CURSEFORGE
       overrideServerProperties: true
       jvmXXOpts: "-XX:MaxRAMPercentage=75"
       memory: 8192M
