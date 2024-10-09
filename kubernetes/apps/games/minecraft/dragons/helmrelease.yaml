@@ -95,8 +95,7 @@ spec:
       motd: "Isle of Berk"
       worldSaveName: vanilla-survival
       viewDistance: 12
-      modUrls:
-      - "https://www.curseforge.com/minecraft/modpacks/isle-of-berk"
+      downloadModpackUrl: "https://www.curseforge.com/minecraft/modpacks/isle-of-berk"
       # spigetResources:
       # - 36618 #Prom Exporter
       # - 18494 #DiscordSRV
