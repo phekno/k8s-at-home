@@ -2,18 +2,18 @@
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: dragonsfire-restic
+  name: dragons-restic
 spec:
   secretStoreRef:
     kind: ClusterSecretStore
     name: onepassword-connect
   target:
-    name: dragonsfire-restic-secret
+    name: dragons-restic-secret
     creationPolicy: Owner
     template:
       engineVersion: v2
       data:
-        RESTIC_REPOSITORY: '{{ .BUCKET_NAME }}/dragonsfire'
+        RESTIC_REPOSITORY: '{{ .BUCKET_NAME }}/dragons'
         RESTIC_PASSWORD: '{{ .RESTIC_PASSWORD }}'
         AWS_ACCESS_KEY_ID: '{{ .AWS_ACCESS_KEY_ID }}'
         AWS_SECRET_ACCESS_KEY: '{{ .AWS_SECRET_ACCESS_KEY }}'
@@ -24,15 +24,15 @@ spec:
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: dragonsfire
+  name: dragons
 spec:
-  sourcePVC: dragonsfire-minecraft-datadir
+  sourcePVC: dragons-minecraft-datadir
   trigger:
     schedule: "0 1 * * *"
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 10
-    repository: dragonsfire-restic-secret
+    repository: dragons-restic-secret
     cacheCapacity: 2Gi
     volumeSnapshotClassName: csi-ceph-blockpool
     moverSecurityContext:

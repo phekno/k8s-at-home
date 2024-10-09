@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app dragonsfire
+  name: &app dragons
 spec:
   interval: 30m
   chart:
@@ -29,7 +29,7 @@ spec:
     namespace: storage
   values:
     deploymentAnnotations:
-      secret.reloader.stakater.com/reload: dragonsfire-secret
+      secret.reloader.stakater.com/reload: dragons-secret
     image:
       repository: ghcr.io/itzg/minecraft-server
       tag: java17@sha256:d240667701ee514ea247b66193c1719973f4343e7d62cd1f92e0d8c879f66121
@@ -70,14 +70,14 @@ spec:
       ENABLE_AUTOPAUSE: TRUE # Doesn't work in Kubes
     envFrom:
       - secretRef:
-          name: dragonsfire-secret
+          name: dragons-secret
     persistence:
       storageClass: ceph-block
       dataDir:
         enabled: true
         size: 20Gi
     serviceAnnotations:
-      mc-router.itzg.me/externalServerName: &host dragonsfire.${SECRET_DOMAIN}
+      mc-router.itzg.me/externalServerName: &host dragons.${SECRET_DOMAIN}
     minecraftServer:
       eula: true
       version: 1.18.2
@@ -121,6 +121,6 @@ spec:
            - name: *host
   valuesFrom:
   - kind: Secret
-    name: dragonsfire-secret
+    name: dragons-secret
     valuesKey: rcon_password
     targetPath: minecraftServer.rcon.password
