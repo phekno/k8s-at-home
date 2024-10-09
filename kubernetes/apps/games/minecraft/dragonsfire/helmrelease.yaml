@@ -93,7 +93,7 @@ spec:
       worldSaveName: vanilla-survival
       viewDistance: 12
       modUrls:
-      - "https://www.curseforge.com/minecraft/mc-mods/dragon-fire-mod"
+      - "https://www.curseforge.com/minecraft/mc-mods/ice-and-fire-dragons"
       # spigetResources:
       # - 36618 #Prom Exporter
       # - 18494 #DiscordSRV
