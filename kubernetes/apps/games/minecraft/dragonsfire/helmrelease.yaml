@@ -80,7 +80,7 @@ spec:
       mc-router.itzg.me/externalServerName: &host dragonsfire.${SECRET_DOMAIN}
     minecraftServer:
       eula: true
-      version: 1.20.1
+      version: 1.18.2
       type: AUTO_CURSEFORGE
       overrideServerProperties: true
       jvmXXOpts: "-XX:MaxRAMPercentage=75"
@@ -90,13 +90,13 @@ spec:
       gameMode: survival
       pvp: false
       onlineMode: true
-      whitelist: "phekno"
+      whitelist: "phekno,quinnyf13,harpyf13"
       ops: "phekno"
-      motd: "Dragon's Fire!"
+      motd: "Isle of Berk"
       worldSaveName: vanilla-survival
       viewDistance: 12
       modUrls:
-      - "https://www.curseforge.com/minecraft/mc-mods/ice-and-fire-dragons"
+      - "https://www.curseforge.com/minecraft/modpacks/isle-of-berk"
       # spigetResources:
       # - 36618 #Prom Exporter
       # - 18494 #DiscordSRV
