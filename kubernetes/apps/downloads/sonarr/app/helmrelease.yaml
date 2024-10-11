@@ -76,10 +76,10 @@ spec:
                 enabled: false
             resources:
               requests:
-                cpu: 500m
-                memory: 500Mi
-              limits:
+                cpu: 1000m
                 memory: 2Gi
+              limits:
+                memory: 4Gi
     service:
       app:
         controller: *app
