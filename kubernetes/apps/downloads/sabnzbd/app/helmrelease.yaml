@@ -107,18 +107,20 @@ spec:
         accessMode: ReadWriteOnce
       tmp:
         type: emptyDir
-      media:
-        type: nfs
-        server: 10.100.50.5
-        path: /tank/video
-        globalMounts:
-          - path: /media
+      # media:
+      #   type: nfs
+      #   server: 10.100.50.5
+      #   path: /tank/video
+      #   globalMounts:
+      #     - path: /media
       downloads:
         type: nfs
         server: 10.100.50.5
         path: /tank/nzbget_downloads
         globalMounts:
           - path: /config/Downloads
+      incomplete:
+        type: emptyDir
 
 # ---
 # # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2beta2.json
