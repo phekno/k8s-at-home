@@ -107,12 +107,6 @@ spec:
         accessMode: ReadWriteOnce
       tmp:
         type: emptyDir
-      # media:
-      #   type: nfs
-      #   server: 10.100.50.5
-      #   path: /tank/video
-      #   globalMounts:
-      #     - path: /media
       downloads:
         type: nfs
         server: 10.100.50.5
