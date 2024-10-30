@@ -94,16 +94,18 @@ spec:
           - hosts:
               - *host
     persistence:
+      # config:
+      #   enabled: true
+      #   type: persistentVolumeClaim
+      #   storageClass: ceph-block
+      #   size: 50Gi
+      #   accessMode: ReadWriteOnce
+      #   globalMounts:
+      #     - path: /var/lib/gitea
       config:
-        enabled: true
-        type: persistentVolumeClaim
-        storageClass: ceph-block
-        size: 50Gi
-        accessMode: ReadWriteOnce
-        globalMounts:
-          - path: /var/lib/gitea
-      gitea:
         enabled: true
         type: nfs
         server: 10.100.50.5
         path: /tank/gitea
+        globalMounts:
+          - path: /var/lib/gitea
