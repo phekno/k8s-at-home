@@ -6,4 +6,4 @@ namespace: development
 resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
-  - ./pvc.yaml
+  # - ./pvc.yaml
