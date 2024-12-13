@@ -89,9 +89,7 @@ spec:
           - auto-gomemlimit
           - memory-snapshot-on-shutdown
           - new-service-discovery-manager
-          # - remote-write-receiver
-        web:
-          enable-remote-write-receiver:
+        enableRemoteWriteReceiver: true
         retention: 14d
         retentionSize: 70GB
         resources:
