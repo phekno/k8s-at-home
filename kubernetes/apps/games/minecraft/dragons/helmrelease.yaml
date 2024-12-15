@@ -32,7 +32,7 @@ spec:
       secret.reloader.stakater.com/reload: dragons-secret
     image:
       repository: ghcr.io/itzg/minecraft-server
-      tag: java17@sha256:6cd1f4e753f9d714e2c1c0d90448843fba1d2d70b154956f2395a719dfdc1889
+      tag: java17@sha256:3a50610894211a5bc7075b853372f8803065067a41d7965b177b297f5bb543a8
     resources:
       requests:
         cpu: 500m
