@@ -8,6 +8,6 @@ resources:
   - ./external-secrets/ks.yaml
   - ./metrics-server/ks.yaml
   - ./reloader/ks.yaml
-  - ./snapshot-controller/ks.yaml
+  # - ./snapshot-controller/ks.yaml
   - ./kubelet-csr-approver/ks.yaml
   - ./spegel/ks.yaml
