@@ -48,7 +48,7 @@ spec:
           app:
             image:
               repository: ghcr.io/onedr0p/radarr-develop
-              tag: 5.16.3.9541@sha256:af1d6a1fb22f135997ed90ec65a5ebc0dec917576f7267002a6b5b4144aedaa0
+              tag: 5.18.1.9612@sha256:64364aa80c8e7bb1350c77a0400dcf7da298cf06c44c84081937955bbbd01e4c
             env:
               TZ: "${TIMEZONE}"
               RADARR__AUTHENTICATION_METHOD: External
