@@ -1,9 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json
 ---
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
-talosVersion: v1.9.2
+# talosVersion: v1.9.2
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
-kubernetesVersion: v1.32.1
+# kubernetesVersion: v1.32.1
 
 clusterName: "home-kubernetes"
 endpoint: https://10.100.50.150:6443
@@ -28,7 +28,7 @@ nodes:
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
-          hardwareAddr: "14:18:77:6d:a1:f1"
+          hardwareAddr: "14:18:77:6d:a1:ed"
         dhcp: false
         addresses:
           - "10.100.50.100/24"

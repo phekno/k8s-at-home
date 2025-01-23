@@ -354,7 +354,7 @@ Resolving problems that you have could take some tweaking of your YAML manifests
 ```sh
 # Upgrade Talos to a newer version
 # NOTE: This needs to be run once on every node
-task talos:upgrade node=? image=?
+talosctl upgrade -n <IP_address> --preserve=true --wait=false --image factory.talos.dev/installer/032aa44d3c16e7761d33a941957477ca0fb279f4c5d13d1ef568de0636464e57:v1.9.2
 # e.g.
 # task talos:upgrade node=192.168.42.10 image=factory.talos.dev/installer/${schematic_id}:v1.7.4
 ```
