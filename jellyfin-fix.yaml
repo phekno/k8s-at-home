@@ -5,18 +5,18 @@ metadata:
   name: jellyfin-fix
 spec:
   restartPolicy: Never
-  nodeName: kubernetes-0
+  nodeName: kubernetes-2
   volumes:
-  - name: rook-data-dir
+  - name: var
     hostPath:
-      path: /var/lib/rook
+      path: /var
   containers:
   - name: disk-clean-0
     image: busybox
     securityContext:
       privileged: true
     volumeMounts:
-    - name: rook-data-dir
-      mountPath: /node/rook-data
-    command: ["/bin/sh"]
-    args: ["-c", "echo BEFORE:;ls -alh /node/rook-data/;rm -rf /node/rook-data/*;echo AFTER:;ls -alh /node/rook-data/"]
+    - name: var
+      mountPath: /node/var
+    command: [ "/bin/sh", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]
