@@ -84,10 +84,10 @@ spec:
         nodes:
           - name: "kubernetes-0"
             devices:
-              - name: "/dev/sdc"
+              - name: "/dev/sdb"
           - name: "kubernetes-1"
             devices:
-              - name: "/dev/sdc"
+              - name: "/dev/sdb"
           - name: "kubernetes-2"
             devices:
               - name: "/dev/sdb"
