@@ -82,9 +82,9 @@ spec:
         config:
           osdsPerDevice: "1"
         nodes:
-          # - name: "kubernetes-0"
-          #   devices:
-          #     - name: "/dev/sdb"
+          - name: "kubernetes-0"
+            devices:
+              - name: "/dev/sdb"
           - name: "kubernetes-1"
             devices:
               - name: "/dev/sdb"
