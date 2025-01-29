@@ -8,11 +8,11 @@ spec:
   nodeName: kubernetes-0
   containers:
   - name: disk-zap-0
-    image: busybox
+    image: alpine
     securityContext:
       privileged: true
     command: ["/bin/sh"]
-    args: ["-c", "sgdisk --zap-all /dev/sdb;dd if=/dev/zero of=/dev/sdb bs=1M count=100 oflag=direct;blkdiscard /dev/sdb;partprobe /dev/sdb"]
+    args: ["-c", "apk add sgdisk;sgdisk --zap-all /dev/sdb;dd if=/dev/zero of=/dev/sdb bs=1M count=1000 oflag=direct;blkdiscard /dev/sdb;partprobe /dev/sdb"]
 ---
 apiVersion: v1
 kind: Pod
@@ -23,11 +23,11 @@ spec:
   nodeName: kubernetes-1
   containers:
   - name: disk-zap-1
-    image: busybox
+    image: alpine
     securityContext:
       privileged: true
     command: ["/bin/sh"]
-    args: ["-c", "sgdisk --zap-all /dev/sdb;dd if=/dev/zero of=/dev/sdb bs=1M count=100 oflag=direct;blkdiscard /dev/sdb;partprobe /dev/sdb"]
+    args: ["-c", "apk add sgdisk;sgdisk --zap-all /dev/sdb;dd if=/dev/zero of=/dev/sdb bs=1M count=1000 oflag=direct;blkdiscard /dev/sdb;partprobe /dev/sdb"]
 ---
 apiVersion: v1
 kind: Pod
@@ -38,8 +38,8 @@ spec:
   nodeName: kubernetes-2
   containers:
   - name: disk-zap-2
-    image: busybox
+    image: alpine
     securityContext:
       privileged: true
     command: ["/bin/sh"]
-    args: ["-c", "sgdisk --zap-all /dev/sdb;dd if=/dev/zero of=/dev/sdb bs=1M count=100 oflag=direct;blkdiscard /dev/sdb;partprobe /dev/sdb"]
+    args: ["-c", "apk add sgdisk;sgdisk --zap-all /dev/sdb;dd if=/dev/zero of=/dev/sdb bs=1M count=1000 oflag=direct;blkdiscard /dev/sdb;partprobe /dev/sdb"]

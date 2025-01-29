@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: alpine
+spec:
+  restartPolicy: Never
+  nodeName: kubernetes-0
+  containers:
+  - name: alpine
+    image: alpine
+    securityContext:
+      privileged: true
+    command: [ "/bin/sh", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]
