@@ -8,12 +8,12 @@ spec:
     kind: ClusterSecretStore
     name: onepassword-connect
   target:
-    name: prowlarr-restic-secret
+    name: oneblock-restic-secret
     creationPolicy: Owner
     template:
       engineVersion: v2
       data:
-        RESTIC_REPOSITORY: "{{ .BUCKET_NAME }}/prowlarr"
+        RESTIC_REPOSITORY: "{{ .BUCKET_NAME }}/oneblock"
         RESTIC_PASSWORD: "{{ .RESTIC_PASSWORD }}"
         AWS_ACCESS_KEY_ID: "{{ .AWS_ACCESS_KEY_ID }}"
         AWS_SECRET_ACCESS_KEY: "{{ .AWS_SECRET_ACCESS_KEY }}"
@@ -24,14 +24,14 @@ spec:
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: prowlarr
+  name: oneblock
 spec:
   trigger:
     manual: restore-once
   restic:
-    repository: prowlarr-restic-secret
+    repository: oneblock-restic-secret
     cacheStorageClassName: ceph-block
-    destinationPVC: prowlarr-config
+    destinationPVC: oneblock-config
     copyMethod: Direct
     moverSecurityContext:
       runAsUser: 1000
