@@ -2,18 +2,18 @@
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: jellyfin-restic-secret
+  name: plex-restic-secret
 spec:
   secretStoreRef:
     kind: ClusterSecretStore
     name: onepassword-connect
   target:
-    name: jellyfin-restic-secret
+    name: plex-restic-secret
     creationPolicy: Owner
     template:
       engineVersion: v2
       data:
-        RESTIC_REPOSITORY: "{{ .BUCKET_NAME }}/jellyfin"
+        RESTIC_REPOSITORY: "{{ .BUCKET_NAME }}/plex"
         RESTIC_PASSWORD: "{{ .RESTIC_PASSWORD }}"
         AWS_ACCESS_KEY_ID: "{{ .AWS_ACCESS_KEY_ID }}"
         AWS_SECRET_ACCESS_KEY: "{{ .AWS_SECRET_ACCESS_KEY }}"
@@ -24,15 +24,15 @@ spec:
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: jellyfin
+  name: plex
 spec:
-  sourcePVC: config-jellyfin-0
+  sourcePVC: plex
   trigger:
     schedule: "0 1 * * *"
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 10
-    repository: jellyfin-restic-secret
+    repository: plex-restic-secret
     cacheCapacity: 2Gi
     volumeSnapshotClassName: csi-ceph-blockpool
     moverSecurityContext:
