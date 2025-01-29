@@ -20,47 +20,47 @@ spec:
       mountPath: /node/rook-data
     command: ["/bin/sh"]
     args: ["-c", "echo BEFORE:;ls -alh /node/rook-data/;rm -rf /node/rook-data/*;echo AFTER:;ls -alh /node/rook-data/"]
-# ---
-# apiVersion: v1
-# kind: Pod
-# metadata:
-#   name: disk-clean-1
-# spec:
-#   restartPolicy: Never
-#   nodeName: kubernetes-1
-#   volumes:
-#   - name: rook-data-dir
-#     hostPath:
-#       path: /var/lib/rook
-#   containers:
-#   - name: disk-clean-1
-#     image: busybox
-#     securityContext:
-#       privileged: true
-#     volumeMounts:
-#     - name: rook-data-dir
-#       mountPath: /node/rook-data
-#     command: ["/bin/sh"]
-#     args: ["-c", "echo BEFORE:;ls -alh /node/rook-data/;rm -rf /node/rook-data/*;echo AFTER:;ls -alh /node/rook-data/"]
-# ---
-# apiVersion: v1
-# kind: Pod
-# metadata:
-#   name: disk-clean-2
-# spec:
-#   restartPolicy: Never
-#   nodeName: kubernetes-2
-#   volumes:
-#   - name: rook-data-dir
-#     hostPath:
-#       path: /var/lib/rook
-#   containers:
-#   - name: disk-clean-2
-#     image: busybox
-#     securityContext:
-#       privileged: true
-#     volumeMounts:
-#     - name: rook-data-dir
-#       mountPath: /node/rook-data
-#     command: ["/bin/sh"]
-#     args: ["-c", "echo BEFORE:;ls -alh /node/rook-data/;rm -rf /node/rook-data/*;echo AFTER:;ls -alh /node/rook-data/"]
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: disk-clean-1
+spec:
+  restartPolicy: Never
+  nodeName: kubernetes-1
+  volumes:
+  - name: rook-data-dir
+    hostPath:
+      path: /var/lib/rook
+  containers:
+  - name: disk-clean-1
+    image: busybox
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - name: rook-data-dir
+      mountPath: /node/rook-data
+    command: ["/bin/sh"]
+    args: ["-c", "echo BEFORE:;ls -alh /node/rook-data/;rm -rf /node/rook-data/*;echo AFTER:;ls -alh /node/rook-data/"]
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: disk-clean-2
+spec:
+  restartPolicy: Never
+  nodeName: kubernetes-2
+  volumes:
+  - name: rook-data-dir
+    hostPath:
+      path: /var/lib/rook
+  containers:
+  - name: disk-clean-2
+    image: busybox
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - name: rook-data-dir
+      mountPath: /node/rook-data
+    command: ["/bin/sh"]
+    args: ["-c", "echo BEFORE:;ls -alh /node/rook-data/;rm -rf /node/rook-data/*;echo AFTER:;ls -alh /node/rook-data/"]
