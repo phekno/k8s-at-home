@@ -6,5 +6,5 @@ resources:
   - ./namespace.yaml
   - ./jellyfin/ks.yaml
   - ./jellyseerr/ks.yaml
-  - ./plex/ks.yaml
+  # - ./plex/ks.yaml
   - ./wizarr/ks.yaml
