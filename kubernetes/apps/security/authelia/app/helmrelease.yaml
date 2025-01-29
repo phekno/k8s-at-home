@@ -125,7 +125,7 @@ spec:
             add_header X-Frame-Options "SAMEORIGIN";
             add_header X-XSS-Protection "1; mode=block";
         hosts:
-          - host: &customHost "auth.${SECRET_DOMAIN}"
+          - host: &host "auth.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
@@ -133,7 +133,7 @@ spec:
                   port: http
         tls:
           - hosts:
-              - *customHost
+              - *host
     persistence:
       config:
         enabled: true
