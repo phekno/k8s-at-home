@@ -1,0 +1,2 @@
+- Delete completed pods in all namespaces: `kubectl delete pod --field-selector=status.phase==Succeeded -A`
+- Delete errored pods in all namespaces: `kubectl delete pod --field-selector=status.phase==Failed -A`
