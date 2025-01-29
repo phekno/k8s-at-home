@@ -114,12 +114,15 @@ spec:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         className: external
         hosts:
-          - host: "status.${SECRET_DOMAIN}"
+          - host: $host "status.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
                   identifier: app
                   port: http
+        tls:
+          - hosts:
+              - *host
     serviceAccount:
       create: true
       name: gatus
