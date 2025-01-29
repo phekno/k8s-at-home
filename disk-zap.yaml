@@ -2,12 +2,12 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: disk-wipe-0
+  name: disk-zap-0
 spec:
   restartPolicy: Never
   nodeName: kubernetes-0
   containers:
-  - name: disk-wipe-0
+  - name: disk-zap-0
     image: alpine
     securityContext:
       privileged: true
@@ -17,12 +17,12 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: disk-wipe-1
+  name: disk-zap-1
 spec:
   restartPolicy: Never
   nodeName: kubernetes-1
   containers:
-  - name: disk-wipe-1
+  - name: disk-zap-1
     image: alpine
     securityContext:
       privileged: true
@@ -33,12 +33,12 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: disk-wipe-2
+  name: disk-zap-2
 spec:
   restartPolicy: Never
   nodeName: kubernetes-2
   containers:
-  - name: disk-wipe-2
+  - name: disk-zap-2
     image: alpine
     securityContext:
       privileged: true
