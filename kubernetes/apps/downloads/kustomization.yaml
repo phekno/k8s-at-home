@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
-  - ./prowlarr/ks.yaml
+  # - ./prowlarr/ks.yaml
   # - ./radarr/ks.yaml
   # - ./readarr/ks.yaml
   # - ./recyclarr/ks.yaml
