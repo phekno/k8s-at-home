@@ -116,7 +116,7 @@ spec:
         cloudnative-pg:
           # renovate: depName="CloudNativePG"
           gnetId: 20417
-          # revision: 1
+          revision: 3
           datasource: Prometheus
         external-dns:
           # renovate: depName="External-dns"
