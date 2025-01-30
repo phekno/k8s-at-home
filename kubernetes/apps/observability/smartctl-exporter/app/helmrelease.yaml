@@ -29,8 +29,8 @@ spec:
     fullnameOverride: *app
     config:
       devices:
+        - /dev/sda
         - /dev/sdb
-        - /dev/sdc
     serviceMonitor:
       enabled: true
     prometheusRules:
