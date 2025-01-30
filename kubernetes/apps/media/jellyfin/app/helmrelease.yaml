@@ -63,10 +63,10 @@ spec:
                 enabled: false
             resources:
               requests:
-                cpu: 2
-                memory: 4Gi
-              limits:
+                cpu: 4
                 memory: 16Gi
+              # limits:
+              #   memory: 16Gi
         statefulset:
           volumeClaimTemplates:
             - name: config
