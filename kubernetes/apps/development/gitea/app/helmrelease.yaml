@@ -63,7 +63,6 @@ spec:
               GITEA__SECURITY__INSTALL_LOCK: "True"
               GITEA__SERVER__DOMAIN: "{{ .Release.Name }}.${SECRET_DOMAIN}"
               GITEA__SERVER__ROOT_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}"
-              # GITEA__SERVER__ROOT_URL: "https://gitea.${SECRET_DOMAIN}"
               GITEA__SERVER__SSH_DOMAIN: "ssh.${SECRET_DOMAIN}"
               GITEA__SERVER__SSH_PORT: 22
             envFrom: *envFrom
