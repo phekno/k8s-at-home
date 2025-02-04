@@ -24,10 +24,6 @@ spec:
       envFrom:
         - secretRef:
             name: *secret
-    authentik:
-      redis:
-        host: redis.db.svc.cluster.local
-        db: 1
     server:
       initContainers:
         - name: init-db
@@ -47,6 +43,8 @@ spec:
         hosts:
           - "sso.${SECRET_DOMAIN}"
         https: false
+    redis:
+      enabled: true
     prometheus:
       rules:
         enabled: true
