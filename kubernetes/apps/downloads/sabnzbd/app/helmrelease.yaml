@@ -65,19 +65,18 @@ spec:
                   httpGet:
                     path: /api?mode=version
                     port: *port
-                  initialDelaySeconds: 0
-                  periodSeconds: 10
-                  timeoutSeconds: 1
+                  initialDelaySeconds: 10
+                  periodSeconds: 30
+                  timeoutSeconds: 5
                   failureThreshold: 3
               readiness: *probes
               startup:
                 enabled: false
             resources:
               requests:
-                cpu: 200m
                 memory: 2Gi
               limits:
-                memory: 12Gi
+                memory: 16Gi
     service:
       app:
         controller: *app
