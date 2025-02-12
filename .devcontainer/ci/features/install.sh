@@ -9,11 +9,11 @@ apk add --no-cache \
 
 apk add --no-cache \
     --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community \
-        kubectl sops
+        kubectl sops lsd
 
-apk add --no-cache \
-    --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing \
-        lsd
+# apk add --no-cache \
+#     --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing \
+#         lsd
 
 for app in \
     "budimanjojo/talhelper!!?as=talhelper&type=script" \
