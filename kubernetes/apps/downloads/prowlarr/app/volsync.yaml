@@ -33,7 +33,7 @@ spec:
     copyMethod: Snapshot
     pruneIntervalDays: 10
     repository: prowlarr-restic-secret
-    cacheCapacity: 2Gi
+    cacheCapacity: 25Gi
     volumeSnapshotClassName: csi-ceph-blockpool
     moverSecurityContext:
       runAsUser: 1000
