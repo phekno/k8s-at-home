@@ -8,4 +8,4 @@ resources:
   - ./helmrelease.yaml
   - ./gatus.yaml
   # - ./restore.yaml
-  # - ./volsync.yaml
+  - ./volsync.yaml
