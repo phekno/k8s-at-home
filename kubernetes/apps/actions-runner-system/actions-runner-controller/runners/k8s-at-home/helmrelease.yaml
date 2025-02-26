@@ -71,7 +71,7 @@ spec:
                 name: talos
                 readOnly: true
         serviceAccountName: *name
-        # volumes:
-        #   - name: talos
-        #     secret:
-        #       secretName: *name
+        volumes:
+          - name: talos
+            secret:
+              secretName: actions-runner-controller-secret
