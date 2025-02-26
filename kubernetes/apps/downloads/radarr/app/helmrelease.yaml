@@ -48,7 +48,6 @@ spec:
           app:
             image:
               repository: ghcr.io/phekno/radarr-develop
-              # tag: 5.19.1.9704@sha256:a7d1426e06c9da902cc79af75f9c45ed3277bfddfe383fe7132cfda681b0ef65
               tag: 5.19.3.9730@sha256:15eaecc8640bf67c5316f0b7bbe86f996cea3a17ea90ff305f9881fb55b43579
             env:
               TZ: "${TIMEZONE}"

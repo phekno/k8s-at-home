@@ -39,7 +39,7 @@ spec:
         initContainers:
           init-db:
             image:
-              repository: ghcr.io/onedr0p/postgres-init
+              repository: ghcr.io/phekno/postgres-init
               tag: 16
             envFrom: &envFrom
               - secretRef:
@@ -47,8 +47,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/sonarr-develop
-              tag: 4.0.13.2931@sha256:2cc6fececf50f6ec4be24ec15dea611261833904f322bbd5e51b6379cbbadf57
+              repository: ghcr.io/phekno/sonarr-develop
+              tag: 4.0.13.2933@sha256:71f69e3de1fec897998779bbf43ee7fff2ef24385ec5a8b64f785ce7e13b617c
             env:
               TZ: "${TIMEZONE}"
               SONARR__AUTHENTICATION_METHOD: External

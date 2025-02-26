@@ -39,7 +39,7 @@ spec:
         initContainers:
           init-db:
             image:
-              repository: ghcr.io/onedr0p/postgres-init
+              repository: ghcr.io/phekno/postgres-init
               tag: 16
             envFrom: &envFrom
               - secretRef:
@@ -47,8 +47,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/prowlarr-develop
-              tag: 1.31.1.4959@sha256:16c1a18c2547dfc11855b6b93877803cd6d0fb4fcaf5588503271cd0057f5e33
+              repository: ghcr.io/phekno/prowlarr-develop
+              tag: 1.31.2.4975@sha256:177fbffcf0b0e66020638782420431684e8ef9a25c8d6247feb43da83a25745d
             env:
               PROWLARR__APP__INSTANCENAME: Prowlarr
               PROWLARR__APP__THEME: dark
