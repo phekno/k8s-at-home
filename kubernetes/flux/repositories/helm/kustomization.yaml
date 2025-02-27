@@ -14,6 +14,7 @@ resources:
   - ./grafana.yaml
   - ./itzg.yaml
   - ./jetstack.yaml
+  - ./kubernetes-dashboard.yaml
   - ./metrics-server.yaml
   - ./openebs.yaml
   - ./piraeus.yaml
