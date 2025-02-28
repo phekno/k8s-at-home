@@ -1,0 +1,79 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: tautulli
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.1
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  interval: 30m
+  dependsOn:
+    - name: rook-ceph-cluster
+    - name: plex
+  values:
+    controllers:
+      tautulli:
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: "OnRootMismatch"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/phekno/tautulli
+              tag: 2.15@sha256:257c01257202836cbfbcc015215d7b42d2839de336540089ad9c99bccf3be636
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /status
+                    port: 8181
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+            resources:
+              requests:
+                cpu: 5m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+    service:
+      app:
+        controller: tautulli
+        ports:
+          http:
+            port: 8181
+    ingress:
+      app:
+        className: internal
+        hosts:
+          - host: "tautulli.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+    persistence:
+      config:
+        enabled: true
+        type: persistentVolumeClaim
+        storageClass: ceph-block
+        size: 10Gi
+        accessMode: ReadWriteOnce
+        globalMounts:
+          - path: /config
