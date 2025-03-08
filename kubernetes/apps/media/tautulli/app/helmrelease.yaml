@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: ghcr.io/phekno/tautulli
-              tag: 2.15@sha256:257c01257202836cbfbcc015215d7b42d2839de336540089ad9c99bccf3be636
+              tag: 2.15@sha256:e216ca0bea1ebe24261059c40b820cf97b4359da1691fe0185c6037a34786d74
             probes:
               liveness: &probes
                 enabled: true
