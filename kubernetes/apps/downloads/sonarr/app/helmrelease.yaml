@@ -48,7 +48,7 @@ spec:
           app:
             image:
               repository: ghcr.io/phekno/sonarr-develop
-              tag: 4.0.13.2933@sha256:71f69e3de1fec897998779bbf43ee7fff2ef24385ec5a8b64f785ce7e13b617c
+              tag: 4.0.14.2938@sha256:35c9d4c78a909a5ce962986788cd12ab3667976d21c691afe2aa6ddbc7961d54
             env:
               TZ: "${TIMEZONE}"
               SONARR__AUTHENTICATION_METHOD: External
