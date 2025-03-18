@@ -48,7 +48,7 @@ spec:
           app:
             image:
               repository: ghcr.io/phekno/radarr-develop
-              tag: 5.19.3.9730@sha256:15eaecc8640bf67c5316f0b7bbe86f996cea3a17ea90ff305f9881fb55b43579
+              tag: 5.20.1.9773@sha256:af5b70f3ce1fd0b265546189d8bfc7973d8ef3553d1f8bc1f67f2f35b6cc016b
             env:
               TZ: "${TIMEZONE}"
               RADARR__AUTHENTICATION_METHOD: External
