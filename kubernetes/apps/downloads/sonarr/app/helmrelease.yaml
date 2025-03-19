@@ -39,16 +39,21 @@ spec:
         initContainers:
           init-db:
             image:
-              repository: ghcr.io/phekno/postgres-init
-              tag: 16
+              repository: ghcr.io/home-operations/postgres-init
+              tag: sha256-a9f405688344a8a6f718e2c344438342ad21540986aeb5ab5fa781831eb2c597
             envFrom: &envFrom
               - secretRef:
                   name: sonarr-secret
         containers:
           app:
             image:
+<<<<<<< HEAD
               repository: ghcr.io/phekno/sonarr-develop
               tag: 4.0.14.2938@sha256:35c9d4c78a909a5ce962986788cd12ab3667976d21c691afe2aa6ddbc7961d54
+=======
+              repository: ghcr.io/home-operations/sonarr
+              tag: sha256-0169c421055790ef8bd9b5c2807663bb487f56daf1f602a20612a0257c491462.sig
+>>>>>>> 674d675 (updates to home-operations images)
             env:
               TZ: "${TIMEZONE}"
               SONARR__AUTHENTICATION_METHOD: External

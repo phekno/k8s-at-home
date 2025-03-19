@@ -39,16 +39,21 @@ spec:
         initContainers:
           init-db:
             image:
-              repository: ghcr.io/phekno/postgres-init
-              tag: 16
+              repository: ghcr.io/home-operations/postgres-init
+              tag: sha256-a9f405688344a8a6f718e2c344438342ad21540986aeb5ab5fa781831eb2c597
             envFrom: &envFrom
               - secretRef:
                   name: radarr-secret
         containers:
           app:
             image:
+<<<<<<< HEAD
               repository: ghcr.io/phekno/radarr-develop
               tag: 5.20.1.9773@sha256:af5b70f3ce1fd0b265546189d8bfc7973d8ef3553d1f8bc1f67f2f35b6cc016b
+=======
+              repository: ghcr.io/home-operations/radarr
+              tag: sha256-e23ae79f0c88aa988aacaf9df34cf626632bed0205c51e7ba34bcc508d2f38a6.sig
+>>>>>>> 674d675 (updates to home-operations images)
             env:
               TZ: "${TIMEZONE}"
               RADARR__AUTHENTICATION_METHOD: External

@@ -57,7 +57,7 @@ spec:
       spec:
         containers:
           - name: runner
-            image: ghcr.io/phekno/actions-runner:2.322@sha256:6d8c13dfb5e16bcec99554f71b761cf9de6461388b1a6d58f7bd6931921bc878
+            image: ghcr.io/home-operations/actions-runner:sha256-079ad66d4aafca56c325325e184921f591ee023af6fd7b26a35a78836e660ce9.sig
             command: ["/home/runner/run.sh"]
             env:
               - name: ACTIONS_RUNNER_REQUIRE_JOB_CONTAINER
