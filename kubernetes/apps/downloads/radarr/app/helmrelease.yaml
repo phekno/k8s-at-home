@@ -48,7 +48,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/radarr
-              tag: 5.20.2.9777
+              tag: 5.22.1.9832
             env:
               TZ: "${TIMEZONE}"
               RADARR__AUTHENTICATION_METHOD: External
