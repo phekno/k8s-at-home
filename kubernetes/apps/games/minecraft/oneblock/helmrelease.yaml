@@ -30,6 +30,7 @@ spec:
     - name: volsync
       namespace: storage
   values:
+    nameOverride: *app
     fullnameOverride: *app
     securityContext:
       runAsUser: 1000

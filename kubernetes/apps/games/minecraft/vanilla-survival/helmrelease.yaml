@@ -28,6 +28,8 @@ spec:
   - name: volsync
     namespace: storage
   values:
+    nameOverride: *app
+    fullnameOverride: *app
     deploymentAnnotations:
       secret.reloader.stakater.com/reload: vanilla-survival-secret
     image:
