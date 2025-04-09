@@ -6,7 +6,7 @@ resources:
   - ./pvc.yaml
   - ./helmrelease.yaml
   # - ./gatus.yaml
-  # - ./volsync.yaml
+  - ./volsync.yaml
 configMapGenerator:
   - name: plex-loki-rules
     files:
