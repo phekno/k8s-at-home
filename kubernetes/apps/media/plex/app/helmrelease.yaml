@@ -36,7 +36,7 @@ spec:
           app:
             image:
               repository: ghcr.io/phekno/plex
-              tag: 1.41.4.9463-630c9f557@sha256:dd3e9ce058d4aafa278f305d14f3e0a9eadc4c5bfdfdb9b93587ffeea8babac9
+              tag: 1.41.4.9463-630c9f557@sha256:1e839adedcc5a564081324e56e3756cea99d8d868528950d573454b5e6d93a0d
             env:
               TZ: America/Chicago
               PLEX_ADVERTISE_URL: https://plex.phekno.io:443,http://10.100.50.155:32400
