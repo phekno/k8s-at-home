@@ -42,7 +42,7 @@ spec:
           app:
             image:
               repository: ghcr.io/phekno/sabnzbd
-              tag: 4.5.0@sha256:d1ecf0e2da3894f6161ca3402193d4750e446d07788c2f0f346975a6ee68465e
+              tag: 4.5.0@sha256:bd418ff91335df9a70de744cf14d1dfe1496d2f27dd27b2868663bc73a500f4c
             env:
               TZ: "${TIMEZONE}"
               SABNZBD__PORT: &port 80
